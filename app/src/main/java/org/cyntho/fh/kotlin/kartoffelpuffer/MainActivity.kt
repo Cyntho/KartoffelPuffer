@@ -1,5 +1,6 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -9,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             actionBar.setDisplayShowHomeEnabled(true)
             actionBar.setIcon(R.mipmap.ic_launcher)
         }
+
+
 
 
         setupActionBarWithNavController(navController, appBarConfiguration)

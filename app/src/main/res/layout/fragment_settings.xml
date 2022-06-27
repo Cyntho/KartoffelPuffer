@@ -16,9 +16,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.923"
+            app:layout_constraintVertical_bias="0.857"
             android:textColor="@color/app_background_main"
-            tools:ignore="TextContrastCheck"/>
+            tools:ignore="TextContrastCheck"
+            app:layout_constraintHorizontal_bias="0.52"/>
 
     <TextView
             android:id="@+id/txSettingsTitle"
@@ -63,24 +64,63 @@
 
     <TextView
             android:text="@string/lbl_username"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="31dp"
             android:minHeight="32dp"
             android:textSize="18sp"
             android:id="@+id/lbl_username"
+            android:labelFor="@id/txt_username"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="80dp"
             app:layout_constraintTop_toBottomOf="@+id/switch_Notifications"
             android:layout_marginTop="15dp"/>
 
+    <TextView
+            android:text="@string/lbl_adminCode"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:minHeight="32dp"
+            android:textSize="18sp"
+            android:id="@+id/lbl_adminCode"
+            android:labelFor="@id/txt_username"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="80dp"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_username"
+            android:layout_marginTop="32dp"/>
+
     <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:inputType=""
+            android:layout_width="181dp"
+            android:layout_height="48dp"
             android:ems="10"
             android:id="@+id/txt_username"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_username"
+            android:minHeight="48dp"
+            android:singleLine="true"
+            android:selectAllOnFocus="true"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintTop_toBottomOf="@+id/switch_Notifications"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toEndOf="@+id/lbl_username"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.2"
+            android:inputType="text"
+            android:importantForAutofill="no"/>
+
+    <EditText
+            android:layout_width="135dp"
+            android:layout_height="52dp"
+            android:ems="10"
+            android:id="@+id/txt_adminCode"
+            android:minHeight="48dp"
+            android:singleLine="true"
+            android:selectAllOnFocus="true"
+            tools:ignore="SpeakableTextPresentCheck"
+            app:layout_constraintTop_toBottomOf="@+id/txt_username"
+            app:layout_constraintStart_toEndOf="@+id/lbl_adminCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.173"
+            android:inputType="text"
+            android:layout_marginTop="15dp"
+            android:maxLength="7"
+            android:importantForAutofill="no"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

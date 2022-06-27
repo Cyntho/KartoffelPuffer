@@ -11,13 +11,16 @@
     <string name="btn_adminCode">Admin Code</string>
     <string name="btn_adminCodeFormat">#0Ac0B76</string>
 
-    <!-- Settings -->
+    <!-- Settings UI -->
     <string name="lbl_DarkMode">Dark mode</string>
     <string name="lbl_Notifications">Benachrichtigungen</string>
     <string name="lbl_username">Name</string>
     <string name="lbl_fontsize">Schriftgröße</string>
+    <string name="lbl_adminCode">Admin Code</string>
 
-
+    <!-- Config File -->
+    <string name="cfgDarkMode">cfgDarkMode</string>
+    <string name="cfgNotifications">cfgNotifications</string>
 
 
     <!-- Text fields -->

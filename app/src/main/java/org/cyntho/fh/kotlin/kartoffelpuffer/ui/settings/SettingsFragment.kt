@@ -1,16 +1,16 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.ui.settings
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -29,33 +29,43 @@ class SettingsFragment : Fragment() {
             ViewModelProvider(this).get(SettingsViewModel::class.java)
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
+        /* --------------- Assign bindings and handler --------------------------- */
+
+        val root: View = binding.root
         val textView: TextView = binding.txSettingsTitle
         val btnTest: Button = binding.btnImprint
 
-
-        settingsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-
-
-        // Assign button?
-        btnTest.setOnClickListener {
-            onButtonClickedHandler()
-
-            val p = Intent(context, SettingsPopupWindow::class.java)
-
-            p.putExtra("popup_title", "Der Titel!")
-            p.putExtra("popup_text", "Der Inhalt der Meldung")
-            p.putExtra("popup_button_text", "Okay?")
-            startActivity(p)
-
+        // DarkMode Switch handler
+        val swDarkMode: Switch = binding.switchDarkMode
+        swDarkMode.setOnClickListener {
+            onDarkModeToggledHandler(swDarkMode.isChecked)
         }
+
+        // Notifications Switch handler
+        val swNotification: Switch = binding.switchNotifications
+        swNotification.setOnClickListener {
+            onNotificationsToggleHandler(swNotification.isChecked)
+        }
+
+        btnTest.setOnClickListener {onButtonClickedHandler()}
+
+
+
+        /* --------------- Initialize data from Settings --------------------------- */
+        // See also: https://developer.android.com/training/data-storage/shared-preferences
+
+        // Load saved settings
+        val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return root
+
+        swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
+        swNotification.isChecked = cfg.getBoolean(getString(R.string.cfgNotifications), false)
 
 
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -64,5 +74,25 @@ class SettingsFragment : Fragment() {
 
     private fun onButtonClickedHandler(){
         println("Das ist ein Test!")
+    }
+
+    private fun onDarkModeToggledHandler(mode: Boolean){
+        val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (cfg.edit())
+        {
+            putBoolean(getString(R.string.cfgDarkMode), mode)
+            apply()
+        }
+        println("DarkMode is now: ${if (mode) "on" else "off"}")
+    }
+
+    private fun onNotificationsToggleHandler(mode: Boolean) {
+        val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (cfg.edit())
+        {
+            putBoolean(getString(R.string.cfgNotifications), mode)
+            apply()
+        }
+        println("Notifications are now: ${if (mode) "on" else "off"}")
     }
 }
