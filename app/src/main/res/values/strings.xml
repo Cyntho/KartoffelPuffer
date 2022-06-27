@@ -18,6 +18,12 @@
     <string name="lbl_fontsize">Schriftgröße</string>
     <string name="lbl_adminCode">Admin Code</string>
 
+    <!-- Main screen UI -->
+    <string name="lbl_date">Datum</string>
+    <string name="lbl_time">Uhrzeit</string>
+    <string name="choose_new_date">Datum wählen</string>
+    <string name="choose_new_time">Uhrzeit wählen</string>
+
     <!-- Config File -->
     <string name="cfgDarkMode">cfgDarkMode</string>
     <string name="cfgNotifications">cfgNotifications</string>
