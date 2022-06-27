@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_background_main">#FFE6AC</color>
     <color name="app_background_header">#777777</color>
+
+    <color name="grid_free">#36f543</color>
+    <color name="grid_taken">#f01a30</color>
+    <color name="grid_wall">#8a8a8a</color>
+
 </resources>

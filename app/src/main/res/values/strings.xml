@@ -27,6 +27,8 @@
     <!-- Config File -->
     <string name="cfgDarkMode">cfgDarkMode</string>
     <string name="cfgNotifications">cfgNotifications</string>
+    <string name="cfgUserToken">cfgUserToken</string>
+    <string name="cfgUserName">cfgUserName</string>
 
 
     <!-- Text fields -->
