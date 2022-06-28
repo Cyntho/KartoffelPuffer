@@ -80,7 +80,7 @@ class SettingsFragment : Fragment() {
 
         swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
         swNotification.isChecked = cfg.getBoolean(getString(R.string.cfgNotifications), false)
-
+        txtUsername.setText(cfg.getString(getString(R.string.cfgUserName), "user"))
 
         return root
     }

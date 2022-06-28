@@ -91,9 +91,9 @@ class HomeFragment : Fragment() {
         ------------------------------------------------------------------------------------------------------ */
 
 
-        // Max: 7x12
+        // Max: 7x9
         val gridHorizontal = 7
-        val gridVertical   = 12
+        val gridVertical   = 9
 
         val prefab = binding.btnGrid1
         var row = binding.tableRow1
