@@ -1,6 +1,5 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
@@ -11,26 +10,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
 import kotlinx.coroutines.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToJsonElement
 import org.cyntho.fh.kotlin.kartoffelpuffer.data.Guest
-import org.cyntho.fh.kotlin.kartoffelpuffer.data.User
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
-import org.cyntho.fh.kotlin.kartoffelpuffer.net.Greeting
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
-import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
-import java.io.ObjectOutputStream
-import java.net.ServerSocket
-import java.net.Socket
-import java.nio.ByteBuffer
 import java.util.*
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,19 +46,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         val cfg = getPreferences(Context.MODE_PRIVATE)
-        val uuid: String = cfg?.getString("client_uuid", UUID.randomUUID().toString())!!
-
-        /*
-        var guest: Guest? = null
-        lifecycleScope.launch {
-             guest = reqTokenAsync(uuid)
-        }.also {
-            println("Also: $guest")
+        if (cfg == null){
+            println("Config is null!")
         }
-        */
-        var guest = runBlocking {
+        val uuid: String = getAdvertiserUUID()
+        val name: String = cfg.getString("cfgUserName", "Unknown")!!
+
+        val guest = runBlocking {
             reqTokenAsync(uuid)
         }
+        guest.userName = name
 
         println("Guest: [$guest]")
 
@@ -86,9 +67,24 @@ class MainActivity : AppCompatActivity() {
 
     private suspend fun reqTokenAsync(uuid: String): Guest {
         val manager = NetManager(lifecycleScope)
-        val response = manager.requestTokenFromServer(uuid)
+        val response = manager.register(uuid)
 
-        return(Guest(response?.userToken ?: "Unrecognized", "to do: get name"))
+        return(Guest(response?.userToken ?: "Unrecognized",
+        response?.data ?: "Unknown"))
+    }
+
+    private fun getAdvertiserUUID(): String {
+        val cfg = getPreferences(Context.MODE_PRIVATE)
+        if (cfg == null){
+            println("Unable to load preferences")
+        } else if (cfg.getString("client_uuid", "") == "") {
+            with (cfg.edit()){
+                putString("client_uuid", UUID.randomUUID().toString())
+                apply()
+            }
+        }
+
+        return cfg.getString("client_uuid", "ERROR: Unable to generate uuid") ?: "ERROR: Cfg broken"
     }
 
 
