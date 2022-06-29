@@ -8,18 +8,18 @@
 
 
     <Button
-            android:text="@string/btn_imprint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_imprint"
-            app:layout_constraintTop_toBottomOf="@+id/txSettingsTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.857"
-            android:textColor="@color/app_background_main"
-            tools:ignore="TextContrastCheck"
-            app:layout_constraintHorizontal_bias="0.52"/>
+        android:id="@+id/btn_imprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_imprint"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txSettingsTitle"
+        app:layout_constraintVertical_bias="0.857"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
             android:id="@+id/txSettingsTitle"

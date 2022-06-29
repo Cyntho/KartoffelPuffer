@@ -14,83 +14,85 @@
             android:layout_height="match_parent">
 
         <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
-
-            <TextView
-                    android:text="@string/lbl_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lblDate"
-                    android:layout_weight="1"
-                    android:labelFor="@id/btnDate"
-                    android:textAlignment="textEnd"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/app_background_User"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnDate"
-                    android:layout_weight="1"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    tools:text="27/06/2022"/>
-
-            <TextView
-                    android:text="@string/lbl_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lblTime"
-                    android:layout_weight="1"
-                    android:labelFor="@id/btnTime"
-                    android:textAlignment="textEnd"/>
+                android:id="@+id/btnDate"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:backgroundTint="#FFFFFF"
+                android:textColor="#000000"
+                app:cornerRadius="5dp"
+                tools:text="27/06/2022" />
 
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnTime"
-                    android:layout_weight="1"
-                    tools:text="10:25"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+                android:id="@+id/btnTime"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"
+                android:textColor="#000000"
+                app:cornerRadius="5dp"
+                tools:text="10:25" />
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <TableLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/tableGrid"
-                    android:layout_margin="0dp"
-                    android:orientation="horizontal"
-                    android:padding="0dp">
+                android:id="@+id/tableGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TableRow
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tableRow1"
-                        android:background="@color/black"
-                        android:layout_margin="0dip"
-                        android:padding="0dip"
-                        android:layout_weight="0"
-                        android:layoutMode="clipBounds">
+                    android:id="@+id/tableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_weight="0"
+                    android:background="@color/black"
+                    android:layoutMode="clipBounds"
+                    android:padding="0dip">
 
                     <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnGrid1"
-                            style="@style/Button.Kotlin_Basics_1"
-                            android:visibility="gone"
-                            tools:ignore="SpeakableTextPresentCheck"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"/>
+                        android:id="@+id/btnGrid1"
+                        style="@style/Button.Kotlin_Basics_1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:visibility="gone"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </TableRow>
 
             </TableLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
