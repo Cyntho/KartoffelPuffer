@@ -1,9 +1,9 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.data
 
-abstract class User {
+abstract class User(userToken: String, userName: String) {
 
-
-    val userToken: String = ""
+    var userToken: String = userToken
+    var userName: String = userName
 
     abstract fun login(): Boolean
     abstract fun logout()
