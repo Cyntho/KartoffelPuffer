@@ -11,8 +11,8 @@
     <color name="app_background_header">#777777</color>
     <color name="app_background_User">#76D279</color>
 
-    <color name="grid_free">#36f543</color>
-    <color name="grid_taken">#f01a30</color>
-    <color name="grid_wall">#8a8a8a</color>
+    <color name="grid_free">#76D279</color>
+    <color name="grid_taken">#E86E6E</color>
+    <color name="grid_wall">#666666</color>
 
 </resources>

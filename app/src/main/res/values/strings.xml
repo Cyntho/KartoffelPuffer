@@ -19,6 +19,9 @@
     <string name="lbl_adminCode">Admin Code</string>
 
     <!-- Main screen UI -->
+    <string name="Wand">Wand</string>
+    <string name="Besetzt">Besetzt</string>
+    <string name="Frei">Frei</string>
     <string name="lbl_date">Datum</string>
     <string name="lbl_time">Uhrzeit</string>
     <string name="choose_new_date">Datum wählen</string>
