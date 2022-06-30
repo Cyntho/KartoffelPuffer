@@ -33,6 +33,10 @@
     <string name="cfgUserToken">cfgUserToken</string>
     <string name="cfgUserName">cfgUserName</string>
 
+    <!-- Networking -->
+    <string name="backend_host">10.0.2.2</string>
+    <string name="backend_port">8080</string>
+
 
     <!-- Text fields -->
     <string name="txt_imprint_text">

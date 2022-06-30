@@ -2,6 +2,7 @@ package org.cyntho.fh.kotlin.kartoffelpuffer.ui.home
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.AttributeSet
@@ -13,8 +14,24 @@ import android.widget.TableRow
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
+import org.cyntho.fh.kotlin.kartoffelpuffer.MainActivity
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentHomeBinding
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.Greeting
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
 import java.util.Calendar
 
 class HomeFragment : Fragment() {
@@ -85,6 +102,10 @@ class HomeFragment : Fragment() {
         txtTime.setOnClickListener { timePicker.show() }
 
 
+        // DEBUG START
+
+
+
         /*
         ------------------------------------------------------------------------------------------------------
                                                   BUILD MAIN VIEW HERE
@@ -105,8 +126,7 @@ class HomeFragment : Fragment() {
                 button.background = prefab.background
                 button.text = ""
 
-
-                //button.id = prefab.id + y
+                button.id
 
                 val index = x * gridHorizontal + y
 
@@ -119,6 +139,8 @@ class HomeFragment : Fragment() {
 
                 row.addView(button)
             }
+
+
 
             // Add new row
             row = TableRow(context!!)

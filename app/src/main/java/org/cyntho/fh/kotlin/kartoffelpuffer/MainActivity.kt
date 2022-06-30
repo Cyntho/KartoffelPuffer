@@ -1,24 +1,25 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import kotlinx.coroutines.*
 import org.cyntho.fh.kotlin.kartoffelpuffer.data.Guest
-import org.cyntho.fh.kotlin.kartoffelpuffer.data.User
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
 import java.util.*
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,34 +45,47 @@ class MainActivity : AppCompatActivity() {
             actionBar.setIcon(R.mipmap.ic_launcher)
         }
 
-        // do the setup
-        val user = setup(this)
-        if (user == null){
-            println("Error occurred during setup. Unable to register user token")
-            exitProcess(1)
-        } else {
-            println("User [${user.userToken}] logging in...")
-
+        val cfg = getPreferences(Context.MODE_PRIVATE)
+        if (cfg == null){
+            println("Config is null!")
         }
+        val uuid: String = getAdvertiserUUID()
+        val name: String = cfg.getString("cfgUserName", "Unknown")!!
+
+        val guest = runBlocking {
+            reqTokenAsync(uuid)
+        }
+        guest.userName = name
+
+        println("Guest: [$guest]")
+
+        // DEBUG END
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    private fun setup(activity: Activity): User?{
+    private suspend fun reqTokenAsync(uuid: String): Guest {
+        val manager = NetManager(lifecycleScope)
+        val response = manager.register(uuid)
 
-        val cfg = activity.getPreferences(Context.MODE_PRIVATE) ?: return null
-        var token = cfg.getString(getString(R.string.cfgUserToken), "")
+        return(Guest(response?.userToken ?: "Unrecognized",
+        response?.data ?: "Unknown"))
+    }
 
-        if (token.equals("")){
-            // Generate user token
+    private fun getAdvertiserUUID(): String {
+        val cfg = getPreferences(Context.MODE_PRIVATE)
+        if (cfg == null){
+            println("Unable to load preferences")
+        } else if (cfg.getString("client_uuid", "") == "") {
             with (cfg.edit()){
-                token = UUID.randomUUID().toString()
-                putString(getString(R.string.cfgUserToken), token)
+                putString("client_uuid", UUID.randomUUID().toString())
+                apply()
             }
         }
 
-        // ToDo: Query server to verify whether user is admin or guest. return guest for now
-        return Guest(token!!, cfg.getString(getString(R.string.cfgUserName), "")!!)
+        return cfg.getString("client_uuid", "ERROR: Unable to generate uuid") ?: "ERROR: Cfg broken"
     }
+
+
 }
