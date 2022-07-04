@@ -13,9 +13,10 @@ data class LayoutWrapper(
 ) {
     fun fillFromArray2D(arr: Array2D){
         data = mutableListOf()
+        var counter = 0
         for (x in 0 until arr.height){
             for (y in 0 until arr.width){
-                data!!.add(x * arr.width + y, arr.arrayContents[y][x])
+                data!!.add(counter++, arr.arrayContents[y][x])
             }
         }
     }

@@ -16,8 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentHomeBinding
@@ -138,6 +136,10 @@ class HomeFragment : Fragment() {
         println("Received:")
         arr?.prettyPrint()
 
+        val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
+        val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
+        val colorTable = ContextCompat.getColor(context!!, R.color.grid_table)
+
         for (y in 0 until wrapper.sizeY){
             for (x in 0 until wrapper.sizeX){
                 val button = AppCompatButton(context!!)
@@ -147,7 +149,6 @@ class HomeFragment : Fragment() {
                 val index = counter
 
                 button.id = prefab.id + ++counter
-                button.text = arr!!.arrayContents[x][y].toString()
 
                 map[index] = button.id
                 list.add(index, button)
@@ -156,12 +157,14 @@ class HomeFragment : Fragment() {
                     handleButtonClick(index)
                 }
 
-                when (arr.arrayContents[x][y]){
-                    0 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_empty))
-                    1 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_wall))
-                    2 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_table))
-                }
+                // ToDo: remove >.>
+                button.text = arr!!.arrayContents[x][y].toString()
 
+                when (arr.arrayContents[x][y]){
+                    0 -> button.setBackgroundColor(colorEmpty)
+                    1 -> button.setBackgroundColor(colorWall)
+                    2 -> button.setBackgroundColor(colorTable)
+                }
 
                 row.addView(button)
             }
@@ -177,27 +180,6 @@ class HomeFragment : Fragment() {
         row.removeView(prefab)
 
         prefab.setOnClickListener { handleButtonClick(0) }
-
-
-        // finally
-        val c_empty = ContextCompat.getColor(context!!, R.color.grid_empty)
-        val c_wall  = ContextCompat.getColor(context!!, R.color.grid_wall)
-        val c_table = ContextCompat.getColor(context!!, R.color.grid_table)
-
-        for (btn in list){
-            when (btn.text) {
-                "0" -> {btn.setBackgroundColor(c_empty)}
-                "1" -> {btn.setBackgroundColor(c_wall)}
-                "2" -> {btn.setBackgroundColor(c_table)}
-            }
-        }
-        /*
-                    0 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_empty))
-                    1 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_wall))
-                    2 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_table))
-                 */
-
-
 
         return root
     }
