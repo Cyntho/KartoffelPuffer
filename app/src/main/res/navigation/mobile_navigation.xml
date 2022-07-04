@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mobile_navigation"
-            app:startDestination="@+id/navigation_home">
+            app:startDestination="@id/navigation_home">
 
     <fragment
             android:id="@+id/navigation_home"
@@ -22,5 +22,20 @@
             android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations.ReservationsFragment"
             android:label="@string/title_reservations"
             tools:layout="@layout/fragment_reservations" />
+
+    <fragment
+            android:id="@+id/navigation_setup"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.setup.SetupFragment"
+            android:label="@string/title_setup"
+            tools:layout="@layout/fragment_setup"
+            />
+
+    <fragment
+            android:id="@+id/navigation_layoutEditor"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.editor.LayoutEditorFragment"
+            android:label="Editor"
+            tools:layout="@layout/fragment_layout_editor"
+            />
+
 
 </navigation>

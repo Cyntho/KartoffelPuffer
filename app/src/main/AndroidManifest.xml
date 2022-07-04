@@ -4,14 +4,12 @@
 
     <application
             android:allowBackup="true"
+            android:name=".app.KartoffelApp"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Kotlin_Basics_1">
-        <activity
-                android:name=".ui.settings.SettingsPopupWindow"
-                android:exported="true"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
@@ -22,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

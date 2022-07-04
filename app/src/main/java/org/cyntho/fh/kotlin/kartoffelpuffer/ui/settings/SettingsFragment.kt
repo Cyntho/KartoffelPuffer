@@ -11,9 +11,16 @@ import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.runBlocking
+import org.cyntho.fh.kotlin.kartoffelpuffer.MainActivity
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
+import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
+import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentSettingsBinding
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
+import org.cyntho.fh.kotlin.kartoffelpuffer.ui.setup.SetupFragment
 
 class SettingsFragment : Fragment() {
 
@@ -36,8 +43,6 @@ class SettingsFragment : Fragment() {
 
         val root: View = binding.root
 
-
-
         // DarkMode Switch handler
         val swDarkMode: Switch = binding.switchDarkMode
         swDarkMode.setOnClickListener {
@@ -52,10 +57,13 @@ class SettingsFragment : Fragment() {
 
         // Imprint button handler
         val btnImprint: Button = binding.btnImprint
-        btnImprint.setOnClickListener {onButtonClickedHandler()}
+        btnImprint.setOnClickListener {
+            it.findNavController().navigate(R.id.navigation_layoutEditor)
+        }
 
         // Text field: Username
         val txtUsername: EditText = binding.txtUsername
+
 
         txtUsername.addTextChangedListener {
             object : TextWatcher {
@@ -70,17 +78,39 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        // Button: Auth as Admin
+        val btnAuth: Button = binding.btnAuthAsAdmin
+        val txtCode = binding.txtAdminCode
+        val app: KartoffelApp = activity!!.application as KartoffelApp
+
+        btnAuth.setOnClickListener {
+            val mgr = NetManager()
+            val token = app.getUserToken()
+
+            println("Attempting admin authorization using token[${app.getUserToken()}] and code [${txtCode.text.toString()}]")
+
+            val isAdmin = runBlocking {
+                mgr.login(token, txtCode.text.toString())
+            }
+
+            app.setAdmin(isAdmin)
+            app.setAdminView(isAdmin)
+
+            // ToDo: Handle displaying..
+        }
+
 
 
         /* --------------- Initialize data from Settings --------------------------- */
         // See also: https://developer.android.com/training/data-storage/shared-preferences
 
         // Load saved settings
-        val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return root
+        val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return root
 
         swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
         swNotification.isChecked = cfg.getBoolean(getString(R.string.cfgNotifications), false)
-        txtUsername.setText(cfg.getString(getString(R.string.cfgUserName), "user"))
+
+        txtUsername.setText(app.getUserName())
 
         return root
     }
@@ -88,13 +118,18 @@ class SettingsFragment : Fragment() {
 
 
     override fun onDestroyView() {
+
+        val userField = binding.txtUsername
+        if (!userField.text.equals("") && userField.text.length > 3){
+            val app = (activity!!.application as KartoffelApp)
+            app.setUserName(userField.text.toString())
+            app.save()
+        }
+
         super.onDestroyView()
         _binding = null
     }
 
-    private fun onButtonClickedHandler(){
-        println("Das ist ein Test!")
-    }
 
     private fun onDarkModeToggledHandler(mode: Boolean){
         val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return

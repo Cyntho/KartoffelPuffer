@@ -5,12 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.coroutines.*
+import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.data.Guest
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_settings, R.id.navigation_home, R.id.navigation_reservations
+                R.id.navigation_settings, R.id.navigation_home, R.id.navigation_reservations, R.id.navigation_setup
             )
         )
 
@@ -45,47 +47,32 @@ class MainActivity : AppCompatActivity() {
             actionBar.setIcon(R.mipmap.ic_launcher)
         }
 
-        val cfg = getPreferences(Context.MODE_PRIVATE)
-        if (cfg == null){
-            println("Config is null!")
-        }
-        val uuid: String = getAdvertiserUUID()
-        val name: String = cfg.getString("cfgUserName", "Unknown")!!
+        val cfg = getSharedPreferences("config", Context.MODE_PRIVATE)
 
-        val guest = runBlocking {
-            reqTokenAsync(uuid)
-        }
-        guest.userName = name
+        val uuid = cfg.getString(getString(R.string.cfgUUID), UUID.randomUUID().toString()) ?: UUID.randomUUID().toString()
+        val name: String = cfg.getString(getString(R.string.cfgUserName), "Unknown") ?: "Unknown"
 
-        println("Guest: [$guest]")
+        val app: KartoffelApp = application as KartoffelApp
+        val serverResponse = runBlocking {
+            NetManager().register(uuid)
+        }
+
+        app.setUserUUID(uuid)
+        app.setUserName(name)
+        app.setUserToken(serverResponse?.userToken ?: "ERR_CONNECTION")
+        app.setAdmin(serverResponse?.data.toBoolean())
+        app.setAdminView(false)
+        app.debug()
+
+        with (cfg.edit()){
+            putString(getString(R.string.cfgUUID), uuid)
+            apply()
+        }
+
 
         // DEBUG END
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
-
-    private suspend fun reqTokenAsync(uuid: String): Guest {
-        val manager = NetManager(lifecycleScope)
-        val response = manager.register(uuid)
-
-        return(Guest(response?.userToken ?: "Unrecognized",
-        response?.data ?: "Unknown"))
-    }
-
-    private fun getAdvertiserUUID(): String {
-        val cfg = getPreferences(Context.MODE_PRIVATE)
-        if (cfg == null){
-            println("Unable to load preferences")
-        } else if (cfg.getString("client_uuid", "") == "") {
-            with (cfg.edit()){
-                putString("client_uuid", UUID.randomUUID().toString())
-                apply()
-            }
-        }
-
-        return cfg.getString("client_uuid", "ERROR: Unable to generate uuid") ?: "ERROR: Cfg broken"
-    }
-
-
 }

@@ -10,9 +10,13 @@
     <color name="app_background_main">#FFE6AC</color>
     <color name="app_background_header">#777777</color>
     <color name="app_background_User">#76D279</color>
+    <color name="app_background_admin">#eb4034</color>
 
     <color name="grid_free">#76D279</color>
     <color name="grid_taken">#E86E6E</color>
+
     <color name="grid_wall">#666666</color>
+    <color name="grid_table">#9da9bd</color>
+    <color name="grid_empty">#d1bc8c</color>
 
 </resources>

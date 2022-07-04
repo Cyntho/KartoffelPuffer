@@ -8,18 +8,18 @@
 
 
     <Button
-        android:id="@+id/btn_imprint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_imprint"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txSettingsTitle"
-        app:layout_constraintVertical_bias="0.857"
-        tools:ignore="TextContrastCheck" />
+            android:id="@+id/btn_imprint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_imprint"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txSettingsTitle"
+            app:layout_constraintVertical_bias="0.857"
+            tools:ignore="TextContrastCheck"/>
 
     <TextView
             android:id="@+id/txSettingsTitle"
@@ -121,5 +121,15 @@
             android:layout_marginTop="15dp"
             android:maxLength="7"
             android:importantForAutofill="no"/>
+
+    <Button
+            android:text="@string/btn_authAsAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAuthAsAdmin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="86dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_imprint"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

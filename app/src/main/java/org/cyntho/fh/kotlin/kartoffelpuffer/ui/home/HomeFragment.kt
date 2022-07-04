@@ -2,35 +2,27 @@ package org.cyntho.fh.kotlin.kartoffelpuffer.ui.home
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.google.gson.GsonBuilder
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import org.cyntho.fh.kotlin.kartoffelpuffer.MainActivity
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
+import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentHomeBinding
-import org.cyntho.fh.kotlin.kartoffelpuffer.net.Greeting
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.LayoutWrapper
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
 import java.util.Calendar
 
@@ -101,34 +93,61 @@ class HomeFragment : Fragment() {
         // ToDo: Limit time to 11:00 to 22:00 (not incl in class, need manual check)
         txtTime.setOnClickListener { timePicker.show() }
 
-
-        // DEBUG START
-
-
+        // Handle admin display?
+        val app = activity!!.application as KartoffelApp
+        if (app.displayAdminView()){
+            val background = binding.homeHeader
+            background.setBackgroundColor(ContextCompat.getColor(context!!, R.color.app_background_admin))
+        }
 
         /*
         ------------------------------------------------------------------------------------------------------
                                                   BUILD MAIN VIEW HERE
         ------------------------------------------------------------------------------------------------------ */
 
+        val layoutResponse: NetPacket? =
+            runBlocking {
+                NetManager().send(
+                    "/getCurrentLayout",
+                    NetPacket(
+                        System.currentTimeMillis(),
+                        (app.getUserToken()),
+                        0,
+                        ""
+                    )
+                )
+            }
+
+        if (layoutResponse == null){
+
+            val diag = AlertDialog.Builder(context!!)
+            diag.setTitle("Connection failed")
+            diag.setMessage("Unable to connect to the server. Make sure you are connected to the internet.")
+            diag.setPositiveButton(android.R.string.ok) {_, _ -> }
+            return root
+        }
 
         // Max: 7x9
-        val gridHorizontal = 7
-        val gridVertical   = 9
+        val wrapper = GsonBuilder().create().fromJson(layoutResponse.data, LayoutWrapper::class.java)
 
         val prefab = binding.btnGrid1
         var row = binding.tableRow1
+        val arr = wrapper.asArray2D()
+        var counter = 0
 
-        for (x in 0 until gridVertical){
-            for (y in 0 until gridHorizontal){
+        println("Received:")
+        arr?.prettyPrint()
+
+        for (y in 0 until wrapper.sizeY){
+            for (x in 0 until wrapper.sizeX){
                 val button = AppCompatButton(context!!)
                 button.layoutParams = prefab.layoutParams
                 button.background = prefab.background
                 button.text = ""
+                val index = counter
 
-                button.id
-
-                val index = x * gridHorizontal + y
+                button.id = prefab.id + ++counter
+                button.text = arr!!.arrayContents[x][y].toString()
 
                 map[index] = button.id
                 list.add(index, button)
@@ -137,22 +156,46 @@ class HomeFragment : Fragment() {
                     handleButtonClick(index)
                 }
 
+                when (arr.arrayContents[x][y]){
+                    0 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_empty))
+                    1 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_wall))
+                    2 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_table))
+                }
+
+
                 row.addView(button)
             }
-
-
-
             // Add new row
             row = TableRow(context!!)
             row.layoutParams = binding.tableRow1.layoutParams
             row.setBackgroundColor(Color.BLACK)
             binding.tableGrid.addView(row)
         }
+        println()
 
         // Remove prefab button
         row.removeView(prefab)
 
         prefab.setOnClickListener { handleButtonClick(0) }
+
+
+        // finally
+        val c_empty = ContextCompat.getColor(context!!, R.color.grid_empty)
+        val c_wall  = ContextCompat.getColor(context!!, R.color.grid_wall)
+        val c_table = ContextCompat.getColor(context!!, R.color.grid_table)
+
+        for (btn in list){
+            when (btn.text) {
+                "0" -> {btn.setBackgroundColor(c_empty)}
+                "1" -> {btn.setBackgroundColor(c_wall)}
+                "2" -> {btn.setBackgroundColor(c_table)}
+            }
+        }
+        /*
+                    0 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_empty))
+                    1 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_wall))
+                    2 -> button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_table))
+                 */
 
 
 

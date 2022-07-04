@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/activity_main.xml" value="0.31657608695652173" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_home.xml" value="0.13609467455621302" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_layout_editor.xml" value="0.30625" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_setup.xml" value="0.2765957446808511" />
+      </map>
+    </option>
+  </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>

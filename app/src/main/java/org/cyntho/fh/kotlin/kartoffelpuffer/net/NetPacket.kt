@@ -10,9 +10,11 @@ import kotlinx.serialization.Serializable
  * @param time:         TimeStamp (long) of packet
  * @param userToken:    client identifier
  * @param type:         0 = Status message
- *                      1 = login request
- *                      2 = update request (Menu, Dishes, Layouts..)
- *                      3 = reservation request
+ *                      1 = registration request
+ *                      2 = login request
+ *                      3 = update request: Layout
+ *                      4 = update request: Dishes
+ *                      5 = reservation request
  *
  * @param data:         Actual Data, depends on @type
  */

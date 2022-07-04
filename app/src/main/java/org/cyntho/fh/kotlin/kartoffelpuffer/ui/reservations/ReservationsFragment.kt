@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentReservationsBinding
 
 class ReservationsFragment : Fragment() {
@@ -31,6 +32,9 @@ class ReservationsFragment : Fragment() {
         reservationsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        (activity!!.application as KartoffelApp).debug()
+
         return root
     }
 
