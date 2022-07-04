@@ -17,6 +17,6 @@
 
     <color name="grid_wall">#666666</color>
     <color name="grid_table">#9da9bd</color>
-    <color name="grid_empty">#d1bc8c</color>
+    <color name="grid_empty">#F3E8CE</color>
 
 </resources>

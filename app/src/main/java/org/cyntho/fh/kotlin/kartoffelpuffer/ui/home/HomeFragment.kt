@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.FIND_VIEWS_WITH_TEXT
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
@@ -14,8 +15,14 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import okhttp3.internal.wait
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentHomeBinding
@@ -122,6 +129,7 @@ class HomeFragment : Fragment() {
             diag.setTitle("Connection failed")
             diag.setMessage("Unable to connect to the server. Make sure you are connected to the internet.")
             diag.setPositiveButton(android.R.string.ok) {_, _ -> }
+            diag.show()
             return root
         }
 
@@ -138,13 +146,12 @@ class HomeFragment : Fragment() {
 
         val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
         val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
-        val colorTable = ContextCompat.getColor(context!!, R.color.grid_table)
+        val colorTable = ContextCompat.getColor(context!!, R.color.grid_free)
 
         for (y in 0 until wrapper.sizeY){
             for (x in 0 until wrapper.sizeX){
-                val button = AppCompatButton(context!!)
+                val button = AppCompatButton(prefab.context)
                 button.layoutParams = prefab.layoutParams
-                button.background = prefab.background
                 button.text = ""
                 val index = counter
 
@@ -157,10 +164,9 @@ class HomeFragment : Fragment() {
                     handleButtonClick(index)
                 }
 
-                // ToDo: remove >.>
-                button.text = arr!!.arrayContents[x][y].toString()
+                button.tag = "gridButton_$index"
 
-                when (arr.arrayContents[x][y]){
+                when (arr!!.arrayContents[x][y]){
                     0 -> button.setBackgroundColor(colorEmpty)
                     1 -> button.setBackgroundColor(colorWall)
                     2 -> button.setBackgroundColor(colorTable)
@@ -174,7 +180,6 @@ class HomeFragment : Fragment() {
             row.setBackgroundColor(Color.BLACK)
             binding.tableGrid.addView(row)
         }
-        println()
 
         // Remove prefab button
         row.removeView(prefab)
@@ -182,6 +187,20 @@ class HomeFragment : Fragment() {
         prefab.setOnClickListener { handleButtonClick(0) }
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val pack = NetPacket(System.currentTimeMillis(), (activity!!.application as KartoffelApp).getUserToken(), 0, System.currentTimeMillis().toString())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = NetManager().send("/getReservationsFor", pack)
+            println("Response: $response")
+
+        }
+
+
     }
 
     private fun handleButtonClick(id: Int){
