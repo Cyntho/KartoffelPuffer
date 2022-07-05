@@ -45,10 +45,10 @@
     <string name="title_reservations_dish">Informationen zum Gericht</string>
     <string name="fav_food">Unsere beliebtesten Gerichte:</string>
 
+    <string name="reservation_fee">Um Betrug vorzubeugen müssen wir Sie leider darum bitten einen Betrag von 4,99€ als Reservierungsgebühr zu bezahlen. Dieser Betrag wird später von Ihrer Rechnung abgezogen.</string>
+
     <!-- ReservationInfo -->
     <string name="reservation_info_title">Informationen zu deiner Reservieung</string>
-    <string name="title_reservations_dish">Informationen zum Gericht</string>
-
     <!-- Text fields -->
     <string name="txt_imprint_text">
         <b>Impressum</b>
