@@ -21,6 +21,12 @@
     <string name="lbl_fontsize">Schriftgröße</string>
     <string name="lbl_adminCode">Admin Code</string>
 
+    <!-- Admin Reservation-->
+    <string name="res_date">Reservierungen am:</string>
+
+    <!-- Create Dish-->
+    <string name="title_createDish">Gericht erstellen</string>
+
     <!-- Main screen UI -->
     <string name="Wand">Wand</string>
     <string name="Besetzt">Besetzt</string>
