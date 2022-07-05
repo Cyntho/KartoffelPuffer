@@ -35,29 +35,6 @@ class ReservationsFragment : Fragment() {
         val currentAttempt = app.getCurrentReservation()?: return root
 
         // Set references
-        val txtDate = binding.txtDate
-        val txtTime = binding.txtTime
-        val btnSetAmount = binding.btnChangeAmount
-
-        txtDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(currentAttempt.time)
-        txtTime.text = SimpleDateFormat("HH:mm", Locale.GERMAN).format(currentAttempt.time)
-        btnSetAmount.text = String.format("%s / %s", currentAttempt.pplCurrent, currentAttempt.pplMax)
-
-
-        // dbg
-        val allergies = app.getAllergyList()
-        println("Allergies:")
-        for (allergy in allergies){
-            println("\t$allergy")
-        }
-
-        println("Dishes:")
-        for (dish in app.getDishList()){
-            println("\t$dish")
-        }
-
-
-
 
 
 

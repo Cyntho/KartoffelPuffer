@@ -133,40 +133,48 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/gluten"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Gluten"
-                    android:textSize="10sp" />
+                        android:id="@+id/gluten"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Gluten"
+                        android:textSize="10sp"
+                        android:checkable="false"
+                        android:clickable="false"/>
 
                 <Button
-                    android:id="@+id/Eier"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Eier"
-                    android:textSize="10sp" />
+                        android:id="@+id/Eier"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Eier"
+                        android:textSize="10sp"
+                        android:clickable="false"
+                        android:checkable="false"/>
 
                 <Button
-                    android:id="@+id/Fisch"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Fisch"
-                    android:textSize="10sp" />
+                        android:id="@+id/Fisch"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Fisch"
+                        android:textSize="10sp"
+                        android:clickable="false"
+                        android:checkable="false"/>
 
                 <Button
-                    android:id="@+id/Soja"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Soja"
-                    android:textSize="10sp" />
+                        android:id="@+id/Soja"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Soja"
+                        android:textSize="10sp"
+                        android:clickable="false"
+                        android:checkable="false"/>
             </LinearLayout>
 
             <LinearLayout
@@ -175,48 +183,62 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/Nüsse"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Nüsse"
-                    android:textSize="10sp" />
+                        android:id="@+id/Nüsse"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Nüsse"
+                        android:textSize="10sp"
+                        android:clickable="false"
+                        android:checkable="false"/>
 
                 <Button
-                    android:id="@+id/Milch"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Milch"
-                    android:textSize="10sp" />
+                        android:id="@+id/Milch"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Milch"
+                        android:textSize="10sp"
+                        android:clickable="false"
+                        android:checkable="false"/>
 
                 <Button
-                    android:id="@+id/Lupinen"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Lupinen"
-                    android:textSize="10sp" />
+                        android:id="@+id/Lupinen"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Lupinen"
+                        android:textSize="10sp"
+                        android:clickable="false"
+                        android:checkable="false"/>
 
                 <Button
-                    android:id="@+id/Sesam"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:text="Sesam"
-                    android:textSize="10sp" />
+                        android:id="@+id/Sesam"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Sesam"
+                        android:textSize="10sp"
+                        android:clickable="false"/>
             </LinearLayout>
+
         </LinearLayout>
 
+        <TextView
+                android:text="Beschreibung"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/dishDescription"/>
+
         <Button
-            android:id="@+id/dish_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hinzufügen" />
+                android:id="@+id/dish_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hinzufügen"/>
 
         <Button
             android:id="@+id/dish_cancel"

@@ -1,6 +1,7 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.ui.editor
 
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -49,22 +50,7 @@ class LayoutEditorFragment : Fragment() {
         binding.btnSave.setOnClickListener {attemptSaving()}
         binding.btnTest.setOnClickListener {
 
-            // only send array2d
-            /*
-            val typetoken = object : TypeToken<Array<Array<Int>>>() {}.type
-            val wrapper = Gson().toJson(arr.arrayContents, typetoken)
-            println("Wrapped: $wrapper")
-            */
-
-            val layout = LayoutWrapper(0, arr.width, arr.height, "Something", 0, 0, true, null)
-            layout.fillFromArray2D(arr)
-
-            val wrapper = Gson().toJson(layout)
-
-            println("Wrapped: $wrapper")
-
-            val unwrapped = Gson().fromJson(wrapper, LayoutWrapper::class.java)
-            println("Unwrapped: $unwrapped")
+            // ToDo --> Remove Test button..
 
         }
 

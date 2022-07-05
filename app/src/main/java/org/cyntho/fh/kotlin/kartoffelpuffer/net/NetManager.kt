@@ -1,6 +1,5 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.net
 
-import androidx.lifecycle.LifecycleCoroutineScope
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -9,6 +8,10 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.util.cio.*
+import io.ktor.utils.io.*
+import kotlinx.serialization.json.Json
+import java.io.File
 
 class NetManager() {
 
@@ -72,4 +75,9 @@ class NetManager() {
         }
         return null
     }
+
+
+    public fun getClient(): HttpClient { return client }
+
+
 }

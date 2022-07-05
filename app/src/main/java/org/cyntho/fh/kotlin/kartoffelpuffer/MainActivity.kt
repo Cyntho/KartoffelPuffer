@@ -1,5 +1,6 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer
 
+import android.app.DownloadManager
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
@@ -10,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.gson.GsonBuilder
+import io.ktor.client.request.*
 import kotlinx.coroutines.*
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.data.Dish
@@ -17,6 +19,7 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.AllergyWrapper
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
+import java.io.File
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,14 +40,19 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_settings, R.id.navigation_home, R.id.navigation_reservations, R.id.navigation_setup
+                R.id.navigation_settings,
+                R.id.navigation_home,
+                R.id.navigation_reservations,
+                R.id.navigation_setup,
+                R.id.navigation_reservation_details,
+                R.id.navigation_dish_details
             )
         )
 
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null)
         {
-            actionBar.setDisplayShowHomeEnabled(true)
+            actionBar.setDisplayShowHomeEnabled(false)
             actionBar.setIcon(R.mipmap.ic_launcher)
         }
 
@@ -69,13 +77,7 @@ class MainActivity : AppCompatActivity() {
             apply()
         }
 
-
-        // Update from backend
-        println("Begin: Update!")
-
         getUpdateFromServer()
-        //updateAllergyList()
-        println("End: Update!")
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -120,6 +122,15 @@ class MainActivity : AppCompatActivity() {
                 println("Dishes loaded.")
             } else {
                 println("Unable to load Dishes")
+            }
+        }
+
+        for (dish in (application as KartoffelApp).getDishList()){
+            println("Dish:")
+            println("ID: ${dish.dishId}\tName: ${dish.name}")
+            println("Allergies:")
+            for (allergy in dish.allergies){
+                print("${allergy.name} ")
             }
         }
     }

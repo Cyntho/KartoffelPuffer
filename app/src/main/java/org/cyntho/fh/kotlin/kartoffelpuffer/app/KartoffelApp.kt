@@ -25,6 +25,7 @@ class KartoffelApp : Application() {
     private var _currentReservationAttempt: ReservationHolder? = null
     private var _allergyList: MutableList<AllergyWrapper> = mutableListOf()
     private var _dishList: MutableList<Dish> = mutableListOf()
+    private var _dishMap: MutableMap<Int, Dish> = mutableMapOf()
 
 
     public fun getUserName() : String{ return _userName }
@@ -47,8 +48,16 @@ class KartoffelApp : Application() {
     public fun getAllergyList(): MutableList<AllergyWrapper> { return _allergyList}
 
     // Dishes
-    public fun setDishList(list: MutableList<Dish>) { _dishList = list }
+    public fun setDishList(list: MutableList<Dish>) {
+        _dishList = list
+        _dishMap = mutableMapOf()
+        for (entry in list){
+            _dishMap[entry.dishId] = entry
+        }
+    }
     public fun getDishList(): MutableList<Dish> { return _dishList }
+
+    public fun getDishById(id: Int): Dish? { return _dishMap[id]}
 
 
     public fun debug(){

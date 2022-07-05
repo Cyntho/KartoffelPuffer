@@ -150,7 +150,7 @@ class HomeFragment : Fragment() {
         var counter = 0
         val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
         val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
-        val colorTable = ContextCompat.getColor(context!!, R.color.grid_free)
+        val colorTable = ContextCompat.getColor(context!!, R.color.grid_table)
 
         for (y in 0 until wrapper.sizeY){
             for (x in 0 until wrapper.sizeX){
@@ -239,7 +239,7 @@ class HomeFragment : Fragment() {
                     ((activity!!.application) as KartoffelApp).setCurrentReservation(
                         ReservationHolder(x, y, timestamp, 1, 4, null)
                     )
-                    findNavController().navigate(R.id.navigation_reservations)
+                    findNavController().navigate(R.id.navigation_reservation_details)
                 }
                 diag.setNegativeButton(android.R.string.cancel) {_, _ ->}
                 diag.show()

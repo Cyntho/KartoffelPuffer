@@ -37,6 +37,29 @@
             tools:layout="@layout/fragment_layout_editor"
             />
 
+    <fragment
+            android:id="@+id/navigation_reservation_details"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations.ReservationDetail"
+            android:label="Reservation Details"
+            tools:layout="@layout/fragment_reservation_detail"
+            >
+        <action
+                android:id="@+id/action_navigation_reservation_details_to_navigation_dish_details"
+                app:destination="@id/navigation_dish_details"/>
+    </fragment>
+    <fragment
+            android:id="@+id/navigation_dish_details"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations.ReservationDish"
+            android:label="Dish Details"
+            tools:layout="@layout/fragment_reservation_dish"
+            >
+        <argument
+                android:name="dish_id"
+                app:argType="integer"
+                android:defaultValue="-1"/>
+    </fragment>
+
+
 
 
 </navigation>
