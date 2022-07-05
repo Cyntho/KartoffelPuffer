@@ -102,11 +102,18 @@
             android:text="@string/fav_food" />
 
         <LinearLayout
-            android:id="@+id/food_select"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/app_background_header"
-            android:orientation="horizontal">
+                android:id="@+id/food_select"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/app_background_header"
+                android:orientation="horizontal">
+
+            <Button
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnFoodPrefab"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
 
         </LinearLayout>
 

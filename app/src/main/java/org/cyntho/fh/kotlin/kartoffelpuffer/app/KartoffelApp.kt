@@ -3,9 +3,14 @@ package org.cyntho.fh.kotlin.kartoffelpuffer.app
 import android.app.Application
 import android.content.Context
 import io.ktor.http.*
-import kotlinx.coroutines.runBlocking
+import io.ktor.util.*
+import kotlinx.coroutines.*
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
+import org.cyntho.fh.kotlin.kartoffelpuffer.data.Dish
+import org.cyntho.fh.kotlin.kartoffelpuffer.data.ReservationHolder
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.AllergyWrapper
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
 import java.util.*
 
 class KartoffelApp : Application() {
@@ -15,6 +20,11 @@ class KartoffelApp : Application() {
     private var _userToken: String = "Uninitialized"
     private var _isAdmin: Boolean = false
     private var _adminViewActive: Boolean = false
+
+    // Global runtime
+    private var _currentReservationAttempt: ReservationHolder? = null
+    private var _allergyList: MutableList<AllergyWrapper> = mutableListOf()
+    private var _dishList: MutableList<Dish> = mutableListOf()
 
 
     public fun getUserName() : String{ return _userName }
@@ -27,6 +37,19 @@ class KartoffelApp : Application() {
     public fun setUserToken(value: String) { _userToken = value }
     public fun setAdmin(value: Boolean) { _isAdmin = value }
     public fun setAdminView(value: Boolean) { _adminViewActive = value}
+
+    // Reservation
+    public fun setCurrentReservation(res: ReservationHolder){ _currentReservationAttempt = res}
+    public fun getCurrentReservation(): ReservationHolder? { return _currentReservationAttempt }
+
+    // Allergies
+    public fun setAllergyList(list: MutableList<AllergyWrapper>) { _allergyList = list}
+    public fun getAllergyList(): MutableList<AllergyWrapper> { return _allergyList}
+
+    // Dishes
+    public fun setDishList(list: MutableList<Dish>) { _dishList = list }
+    public fun getDishList(): MutableList<Dish> { return _dishList }
+
 
     public fun debug(){
         println("Username: [$_userName]\t token: [$_userToken]\t uuid: [$_userUUID]\t isAdmin: [$_isAdmin]\t adminView: [$_adminViewActive]")

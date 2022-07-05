@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.FIND_VIEWS_WITH_TEXT
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
@@ -15,33 +14,42 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.android.awaitFrame
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import okhttp3.internal.wait
+import io.ktor.util.*
+import kotlinx.coroutines.*
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
+import org.cyntho.fh.kotlin.kartoffelpuffer.data.ReservationHolder
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentHomeBinding
-import org.cyntho.fh.kotlin.kartoffelpuffer.net.LayoutWrapper
-import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
-import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
-import java.util.Calendar
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.*
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.coroutines.suspendCoroutine
 
 class HomeFragment : Fragment() {
 
+    // Bindings
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
-    private val list: MutableList<AppCompatButton> = mutableListOf()
-    private val map: HashMap<Int, Int> = HashMap()
+    // References to table layout
+    private val idToCoordinateMap: HashMap<Int, Array<Int>> = HashMap() // ButtonId = arrayOf(x, y)
+    private val storedReservations: HashMap<Int, Timestamp> = HashMap() // ButtonId = Timestamp (table free)
+    private var array: Array2D? = null
+
+    // Handling of times
+    private var cal: Calendar = Calendar.getInstance()
+    private var timeYear: Int = cal.get(Calendar.YEAR)
+    private var timeMonth: Int = cal.get(Calendar.MONTH)
+    private var timeDay: Int = cal.get(Calendar.DAY_OF_MONTH)
+    private var timeHour: Int = cal.get(Calendar.HOUR_OF_DAY)
+    private var timeMinute: Int = cal.get(Calendar.MINUTE)
+    private var timestamp: Timestamp = Timestamp(System.currentTimeMillis())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,12 +64,8 @@ class HomeFragment : Fragment() {
 
         // Handling DatePicker
         val txtDate = binding.btnDate
-        val currentTime = Calendar.getInstance()
-        val year = currentTime.get(Calendar.YEAR)
-        val month = currentTime.get(Calendar.MONTH)
-        val day = currentTime.get(Calendar.DAY_OF_MONTH)
+        txtDate.text = String.format("%d / %d / %d", timeDay, timeMonth + 1, timeYear)
 
-        txtDate.setText(String.format("%d / %d / %d", day, month + 1, year))
         if (context == null) return root
 
         val datePicker = DatePickerDialog(
@@ -69,34 +73,38 @@ class HomeFragment : Fragment() {
             { _, year, month, dayOfMonth ->
                 run {
                     txtDate.text = String.format("%d / %d / %d", dayOfMonth, month + 1, year)
+                    timeYear = year
+                    timeMonth = month
+                    timeDay = dayOfMonth
                     handleTimeChanged()
                 }
-            }, year, month, day);
+            }, timeYear, timeMonth, timeDay);
 
         // Set interval to current time + 30 days
         datePicker.datePicker.minDate = System.currentTimeMillis() - 1000
-        currentTime.add(Calendar.MONTH, 1)
-        datePicker.datePicker.maxDate = currentTime.timeInMillis
-        currentTime.add(Calendar.MONTH, -1)
+        cal.add(Calendar.MONTH, 1)
+        datePicker.datePicker.maxDate = cal.timeInMillis
+        cal.add(Calendar.MONTH, -1)
 
         txtDate.setOnClickListener { datePicker.show() }
 
 
         // Handling TimePicker
         val txtTime = binding.btnTime
-        txtTime.text = String.format("%02d : %02d", currentTime.get(Calendar.HOUR_OF_DAY), currentTime.get(Calendar.MINUTE))
+        txtTime.text = String.format("%02d : %02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE))
 
         val timePicker = TimePickerDialog (
             context!!,
             0,
             getTimePickerListener(txtTime),
-            currentTime.get(Calendar.HOUR_OF_DAY),
-            currentTime.get(Calendar.MINUTE),
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
             true
         )
 
+
         // ToDo: Limit time to 11:00 to 22:00 (not incl in class, need manual check)
-        txtTime.setOnClickListener { timePicker.show() }
+        txtTime.setOnClickListener {timePicker.show()}
 
         // Handle admin display?
         val app = activity!!.application as KartoffelApp
@@ -138,12 +146,8 @@ class HomeFragment : Fragment() {
 
         val prefab = binding.btnGrid1
         var row = binding.tableRow1
-        val arr = wrapper.asArray2D()
+        array = wrapper.asArray2D()
         var counter = 0
-
-        println("Received:")
-        arr?.prettyPrint()
-
         val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
         val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
         val colorTable = ContextCompat.getColor(context!!, R.color.grid_free)
@@ -157,8 +161,7 @@ class HomeFragment : Fragment() {
 
                 button.id = prefab.id + ++counter
 
-                map[index] = button.id
-                list.add(index, button)
+                idToCoordinateMap[index] = arrayOf(x, y, array!!.arrayContents[x][y])
 
                 button.setOnClickListener {
                     handleButtonClick(index)
@@ -166,7 +169,7 @@ class HomeFragment : Fragment() {
 
                 button.tag = "gridButton_$index"
 
-                when (arr!!.arrayContents[x][y]){
+                when (array!!.arrayContents[x][y]){
                     0 -> button.setBackgroundColor(colorEmpty)
                     1 -> button.setBackgroundColor(colorWall)
                     2 -> button.setBackgroundColor(colorTable)
@@ -189,22 +192,61 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    /**
+     * Handle all one-time updates here
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val pack = NetPacket(System.currentTimeMillis(), (activity!!.application as KartoffelApp).getUserToken(), 0, System.currentTimeMillis().toString())
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = NetManager().send("/getReservationsFor", pack)
-            println("Response: $response")
-
-        }
-
-
+        handleTimeChanged()
     }
 
+
+
     private fun handleButtonClick(id: Int){
-        println("Button $id has been clicked!")
+        try {
+            val x = idToCoordinateMap[id]!![0]
+            val y = idToCoordinateMap[id]!![1]
+            val type = when (idToCoordinateMap[id]!![2]){
+                0 -> "Free"
+                1 -> "Wall"
+                2 -> "Table"
+                else -> {"unknown"}
+            }
+
+            val reserved = storedReservations[id]
+
+            // If table taken, display feedback and return
+            val diag = AlertDialog.Builder(context!!)
+            if (reserved != null){
+                diag.setTitle(getString(R.string.Besetzt))
+                diag.setMessage("Dieser Tisch ist leider vergeben.\n" +
+                        "Er wird frei ab:\n\n $reserved")
+                diag.setNegativeButton(android.R.string.cancel) {_, _ -> }
+                diag.show()
+            } else if (type == "Table") {
+
+            // Table appears to be free. Prompt details
+                diag.setTitle(getString(R.string.Frei))
+                diag.setMessage(
+                    "Datum: $timeDay.$timeMonth.$timeYear\n" +
+                    "Uhrzeit: $timeHour:$timeMinute Uhr\n\n" +
+                    "Max. Personen: 4" // ToDO: Remove hard code
+                )
+                diag.setPositiveButton(getString(R.string.btn_confirm)) {
+                    _, _ ->
+
+                    // set ref to current attempt
+                    ((activity!!.application) as KartoffelApp).setCurrentReservation(
+                        ReservationHolder(x, y, timestamp, 1, 4, null)
+                    )
+                    findNavController().navigate(R.id.navigation_reservations)
+                }
+                diag.setNegativeButton(android.R.string.cancel) {_, _ ->}
+                diag.show()
+            }
+        } catch (any: Exception){
+            any.printStackTrace()
+        }
     }
 
     override fun onDestroyView() {
@@ -213,13 +255,55 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleTimeChanged(){
-        println("Updating table view...")
+
+        val df = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.GERMAN)
+        val tmp = df.parse("$timeYear.$timeMonth.$timeDay $timeHour:$timeMinute")
+        if (tmp != null) {
+            timestamp = Timestamp(tmp.time)
+            println("timestamp: ${timestamp}")
+        } else {
+            println("timestamp null")
+        }
+
+        // ToDo Timestamp negativ???
+        val pack = NetPacket(System.currentTimeMillis(), (activity!!.application as KartoffelApp).getUserToken(), 0, timestamp.time.toString())
+        println("Sending: $pack")
+
+        val response = runBlocking {
+            NetManager().send("/getReservationsFor", pack)
+        }
+        if (response == null){
+            println("Unable to reach server.")
+            return
+        }
+
+        val test = GsonBuilder().create().fromJson(response.data, Array<ReservationWrapper>::class.java)
+        for (t in test){
+            try {
+                if (array!!.arrayContents[t.x][t.y] == 2){
+                    // Update table view
+                    val index = t.y * array!!.width + t.x
+                    val btn = view!!.findViewWithTag<AppCompatButton>("gridButton_$index")
+                    btn.setBackgroundColor(Color.RED)
+
+                    // Store data for buttons
+                    storedReservations[index] = Timestamp(t.time)
+                } else {
+                    println("array[${t.x}][${t.y}] := ${array!!.arrayContents[t.x][t.y]}")
+                }
+            } catch (any:Exception){
+                any.printStackTrace()
+            }
+        }
     }
 
     private fun getTimePickerListener(txt: Button) =
         TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             // After selecting time - set text in TextView
-            "%02d:%02d".format(hourOfDay, minute).also { txt.text = it } .also { handleTimeChanged() }
+            "%02d:%02d".format(hourOfDay, minute).also { txt.text = it } . also {
+                timeHour = hourOfDay
+                timeMinute = minute
+            } .also { handleTimeChanged() }
         }
 
 }

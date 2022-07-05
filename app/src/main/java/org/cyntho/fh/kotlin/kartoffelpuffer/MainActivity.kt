@@ -5,17 +5,18 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
-import org.cyntho.fh.kotlin.kartoffelpuffer.data.Guest
+import org.cyntho.fh.kotlin.kartoffelpuffer.data.Dish
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.AllergyWrapper
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        var actionBar: ActionBar? = supportActionBar
+        val actionBar: ActionBar? = supportActionBar
         if (actionBar != null)
         {
             actionBar.setDisplayShowHomeEnabled(true)
@@ -62,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         app.setUserToken(serverResponse?.userToken ?: "ERR_CONNECTION")
         app.setAdmin(serverResponse?.data.toBoolean())
         app.setAdminView(false)
-        app.debug()
 
         with (cfg.edit()){
             putString(getString(R.string.cfgUUID), uuid)
@@ -70,9 +70,57 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // DEBUG END
+        // Update from backend
+        println("Begin: Update!")
+
+        getUpdateFromServer()
+        //updateAllergyList()
+        println("End: Update!")
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+
+    /**
+     * Update stored stuff from server
+     * @return void
+     */
+    private fun getUpdateFromServer() {
+        runBlocking {
+            val response = NetManager().send("/getAllergyList", NetPacket(
+                System.currentTimeMillis(),
+                (application as KartoffelApp).getUserToken(),
+                0,
+                "")
+            )
+
+            if (response != null){
+                val raw = GsonBuilder().create().fromJson(response.data, Array<AllergyWrapper>::class.java)
+                val list = raw.asList().toMutableList()
+                (application as KartoffelApp).setAllergyList(list)
+                println("Allergies loaded.")
+            } else {
+                println("Unable to load Allergies")
+            }
+        }
+
+        runBlocking {
+            val response = NetManager().send("/getDishes", NetPacket(
+                System.currentTimeMillis(),
+                (application as KartoffelApp).getUserToken(),
+                0,
+                "")
+            )
+
+            if (response != null){
+                val raw = GsonBuilder().create().fromJson(response.data, Array<Dish>::class.java)
+                val list = raw.asList().toMutableList()
+                (application as KartoffelApp).setDishList(list)
+                println("Dishes loaded.")
+            } else {
+                println("Unable to load Dishes")
+            }
+        }
     }
 }

@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentReservationsBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ReservationsFragment : Fragment() {
 
@@ -28,12 +30,38 @@ class ReservationsFragment : Fragment() {
         _binding = FragmentReservationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.tvTitle
-        reservationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        // Load app and current reservation. Return on failure
+        val app: KartoffelApp = activity!!.application as KartoffelApp ?: return root
+        val currentAttempt = app.getCurrentReservation()?: return root
 
-        (activity!!.application as KartoffelApp).debug()
+        // Set references
+        val txtDate = binding.txtDate
+        val txtTime = binding.txtTime
+        val btnSetAmount = binding.btnChangeAmount
+
+        txtDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(currentAttempt.time)
+        txtTime.text = SimpleDateFormat("HH:mm", Locale.GERMAN).format(currentAttempt.time)
+        btnSetAmount.text = String.format("%s / %s", currentAttempt.pplCurrent, currentAttempt.pplMax)
+
+
+        // dbg
+        val allergies = app.getAllergyList()
+        println("Allergies:")
+        for (allergy in allergies){
+            println("\t$allergy")
+        }
+
+        println("Dishes:")
+        for (dish in app.getDishList()){
+            println("\t$dish")
+        }
+
+
+
+
+
+
+
 
         return root
     }

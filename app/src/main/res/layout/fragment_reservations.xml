@@ -1,46 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.reservations.ReservationsFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.reservations.ReservationsFragment">
 
     <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/title_reservations"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
-
-        <Button
-            android:id="@+id/reservation_example"
+            android:text="Reservierung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:width="350dp"
-            android:height="100dp"
-            android:maxWidth="500dp"
-            android:minWidth="200dp"
-            android:text="TEst" />
-    </LinearLayout>
+            android:id="@+id/lblTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="40dp"/>
 
+    <TextView
+            android:text="Unsere beliebten Gerichte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblDishes"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="244dp"
+            app:layout_constraintHorizontal_bias="0.503"/>
+
+    <TextView
+            android:text="Datum:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblDate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="84dp"
+            app:layout_constraintHorizontal_bias="0.15"/>
+
+    <TextView
+            android:text="Uhrzeit:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="17dp"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintTop_toBottomOf="@+id/lblDate"/>
+
+    <TextView
+            android:text="Personen:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblPeople"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintTop_toBottomOf="@+id/lblTime"
+            android:layout_marginTop="40dp"/>
+
+    <TextView
+            android:text="01.01.1970"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="84dp"
+            app:layout_constraintHorizontal_bias="0.556"
+            app:layout_constraintStart_toEndOf="@+id/lblDate"/>
+
+    <TextView
+            android:text="17:00 Uhr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.556"
+            app:layout_constraintStart_toEndOf="@+id/lblDate"
+            app:layout_constraintTop_toBottomOf="@+id/txtDate"
+            android:layout_marginTop="16dp"/>
+
+    <Button
+            android:text="3/4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnChangeAmount"
+            app:layout_constraintTop_toBottomOf="@+id/txtTime"
+            app:layout_constraintStart_toEndOf="@+id/lblPeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="28dp"
+            app:layout_constraintHorizontal_bias="0.541"/>
+
+    <ScrollView
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblDishes"
+            app:layout_constraintVertical_bias="0.031"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            android:id="@+id/scrollViewDishes"
+            android:scrollbarStyle="outsideInset">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dishesLayoutHoriz">
+
+            <Button
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnPrefab"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <EditText
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:gravity="start|top"
+            android:ems="10"
+            android:id="@+id/editTextTextMultiLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollViewDishes"
+            android:layout_marginTop="36dp"
+            app:layout_constraintHorizontal_bias="0.497"
+            android:hint="Anmerkungen"
+            style="@style/Widget.AppCompat.EditText"/>
+
+    <Button
+            android:text="@string/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnContinue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="44dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+            app:layout_constraintHorizontal_bias="0.498"/>
+
+    <Button
+            android:text="@android:string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="52dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

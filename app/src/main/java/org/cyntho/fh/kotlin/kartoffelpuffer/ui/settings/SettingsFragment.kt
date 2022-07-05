@@ -132,7 +132,7 @@ class SettingsFragment : Fragment() {
 
 
     private fun onDarkModeToggledHandler(mode: Boolean){
-        val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return
         with (cfg.edit())
         {
             putBoolean(getString(R.string.cfgDarkMode), mode)
@@ -142,7 +142,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun onNotificationsToggleHandler(mode: Boolean) {
-        val cfg = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return
         with (cfg.edit())
         {
             putBoolean(getString(R.string.cfgNotifications), mode)
