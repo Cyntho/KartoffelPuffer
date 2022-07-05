@@ -45,6 +45,9 @@
     <string name="title_reservations_dish">Informationen zum Gericht</string>
     <string name="fav_food">Unsere beliebtesten Gerichte:</string>
 
+    <!-- ReservationInfo -->
+    <string name="reservation_info_title">Informationen zu deiner Reservieung</string>
+    <string name="title_reservations_dish">Informationen zum Gericht</string>
 
     <!-- Text fields -->
     <string name="txt_imprint_text">
