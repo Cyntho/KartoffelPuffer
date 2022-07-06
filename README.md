@@ -25,7 +25,7 @@ Multi-purpose app -  Customers and Restaurant Manager use the same app.
 - Backend installed on some server
 
 ### Tested devices
-###### (Emulated via Jetbrain's IntelliJ IDEA)
+###### (Emulated via JetBrains IntelliJ IDEA)
 - Google Pixel 5 (1080x2340: 440dpi)
 - 
 
