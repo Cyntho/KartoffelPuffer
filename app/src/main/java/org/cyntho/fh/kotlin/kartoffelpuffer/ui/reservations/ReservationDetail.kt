@@ -40,6 +40,7 @@ class ReservationDetail : Fragment() {
     private val binding get() = _binding!!
 
     private var dishMap = mutableMapOf<Int, Int>() // Id --> Amount
+    private var peopleCounter: Int = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -51,11 +52,30 @@ class ReservationDetail : Fragment() {
         val txtDate = binding.reservationDateButton
         val txtTime = binding.dishCountp
         val btnSetAmount = binding.btnReservationSize1
+        val btnAddPeople = binding.btnAddPerson
+        val btnRemPeople = binding.btnRemovePerson
+
+        btnAddPeople.setOnClickListener {
+            if (peopleCounter < 4){
+                peopleCounter++
+                val tmp = "$peopleCounter / ${currentAttempt.pplMax}"
+                btnSetAmount.text = tmp
+            }
+        }
+
+        btnRemPeople.setOnClickListener {
+            if (peopleCounter > 1){
+                peopleCounter--
+                val tmp = "$peopleCounter / ${currentAttempt.pplMax}"
+                btnSetAmount.text = tmp
+            }
+        }
+
+
 
         txtDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(currentAttempt.time)
         txtTime.text = SimpleDateFormat("HH:mm", Locale.GERMAN).format(currentAttempt.time)
         btnSetAmount.text = String.format("%s / %s", currentAttempt.pplCurrent, currentAttempt.pplMax)
-
 
         val imgPrefab = binding.foodPrefab
         val layoutContainer = binding.foodSelect
@@ -208,6 +228,7 @@ class ReservationDetail : Fragment() {
                 println("app.getCurrentReservation() Shouldn't be null!")
             } else {
                 current.dishes = dishMap
+                current.pplCurrent = peopleCounter
                 app.setCurrentReservation(current)
                 findNavController().navigate(R.id.navigation_reservation_confirmation)
             }

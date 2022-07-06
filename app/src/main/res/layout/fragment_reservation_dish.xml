@@ -72,11 +72,10 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/dish_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:foreground="@mipmap/ic_launcher"
-                android:src="@drawable/ic_reservations" />
+                    android:id="@+id/dish_image"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_reservations"/>
 
         </LinearLayout>
 

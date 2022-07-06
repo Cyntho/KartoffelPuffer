@@ -1,5 +1,6 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations
 
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.data.Dish
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentReservationDishBinding
+import java.io.File
 
 class ReservationDish : Fragment() {
 
@@ -74,6 +76,17 @@ class ReservationDish : Fragment() {
         txtDescription.text = dish!!.description
         dishCounter = _backup[dishID] ?: 1
         txtDishAmount.text = dishCounter.toString()
+
+        // Load and display image
+        val iconFile = File((requireActivity().application as KartoffelApp).filesDir.path + "/${dish!!.iconHash}")
+        try {
+            if (iconFile.exists()){
+                val dishImage = binding.dishImage
+                dishImage.setImageBitmap(BitmapFactory.decodeFile(iconFile.absolutePath))
+            }
+        } catch (any: Exception){
+            println("Unable to load image in 'fragment_reservation_dish' for dish '$dishID'")
+        }
 
         // Set button background, if dish has that allergy
         for (allergy in dish!!.allergies){
