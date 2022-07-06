@@ -10,8 +10,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:text="@string/title_reservations_detail"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +24,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,17 +41,26 @@
 
             <TextView
                 android:id="@+id/reservation_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Datum" />
+                android:background="@drawable/roundedbutton"
+                android:gravity="center|center_horizontal"
+                android:text="Datum"
+                android:textColor="@color/black" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/reservation_date_button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:background="@drawable/roundedbutton"
                 android:text="Button" />
         </LinearLayout>
 
@@ -58,17 +71,26 @@
 
             <TextView
                 android:id="@+id/dish_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Uhrzeit" />
+                android:background="@drawable/roundedbutton"
+                android:gravity="center|center_horizontal"
+                android:text="Uhrzeit"
+                android:textColor="@color/black" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/dish_countp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:background="@drawable/roundedbutton"
                 android:text="Button" />
         </LinearLayout>
 
@@ -79,17 +101,27 @@
 
             <TextView
                 android:id="@+id/reservation_size1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="Personen" />
+                android:background="@drawable/roundedbutton"
+                android:gravity="center|center_horizontal"
+                android:text="Personen"
+                android:textColor="@color/black" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnReservationSize1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+
                 android:layout_weight="1"
+                android:background="@drawable/roundedbutton"
                 android:text="Button" />
         </LinearLayout>
 
@@ -102,18 +134,18 @@
             android:text="@string/fav_food" />
 
         <LinearLayout
-                android:id="@+id/food_select"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/app_background_header"
-                android:orientation="horizontal">
+            android:id="@+id/food_select"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/roundedbutton"
+            android:orientation="horizontal">
 
             <ImageView
-                    android:src="@drawable/ic_home_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/foodPrefab"
-                    android:layout_weight="1"/>
+                android:id="@+id/foodPrefab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_home_black_24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -121,49 +153,63 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
-            android:background="@color/grid_wall"
+            android:background="@drawable/roundedbutton"
             android:orientation="vertical">
 
             <LinearLayout
-                    android:orientation="horizontal"
+                android:id="@+id/dishEntryPrefab"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtPrefabName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/dishEntryPrefab">
+                    android:layout_weight="1"
+                    android:text="Name des Gerichts" />
 
                 <TextView
-                        android:text="Name des Gerichts"
-                        android:layout_width="265dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txtPrefabName"/>
+                    android:id="@+id/txtPrefabAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/roundedbuttongrey"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white" />
 
-                <TextView
-                        android:text="0"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/txtPrefabAmount"
-                        android:layout_weight="1"/>
-
-                <Button
-                        android:text="X"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:id="@+id/btnPrefabDelete"
-                        android:layout_weight="1"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPrefabDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/roundedbuttonred"
+                    android:text="X"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dish_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="next" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/roundedbuttongreen"
+            android:text="Weiter" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dish_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="cancel" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/roundedbuttonred"
+            android:text="Abbrechen" />
     </LinearLayout>
 
 
