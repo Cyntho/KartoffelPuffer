@@ -55,6 +55,7 @@
 
     <!-- ReservationInfo -->
     <string name="reservation_info_title">Informationen zu deiner Reservieung</string>
+    <string name="cancel">Abbrechen</string>
     <!-- Text fields -->
     <string name="txt_imprint_text">
         <b>Impressum</b>
