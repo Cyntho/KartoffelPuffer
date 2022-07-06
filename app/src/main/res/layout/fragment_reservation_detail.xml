@@ -97,6 +97,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -113,18 +118,6 @@
                 android:textColor="@color/black" />
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnRemovePerson"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-
-                    android:layout_weight="1"
-                    android:background="@drawable/roundedbuttonred"
-                    android:text="-"/>
-
-            <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnReservationSize1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,18 +128,6 @@
                     android:layout_weight="1"
                     android:background="@drawable/roundedbutton"
                     android:text="Button"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnAddPerson"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-
-                    android:layout_weight="1"
-                    android:background="@drawable/roundedbuttongreen"
-                    android:text="+"/>
 
         </LinearLayout>
 
