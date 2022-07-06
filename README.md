@@ -18,6 +18,7 @@ Multi-purpose app -  Customers and Restaurant Manager use the same app.
 ### Restaurant View:
 - Create and manage restaurant layouts. Layouts may be given a time they are set as active to select from
 - List all customer reservations for a given date and manage them
+- Create and manage dishes (name, foto, description, allergies) for the customer to choose from.
 
 ### Requirements
 - Android 6.0 (API 23) or later
