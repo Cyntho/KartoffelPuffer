@@ -1,13 +1,14 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations
 
+import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
@@ -54,6 +55,7 @@ class ReservationDetail : Fragment() {
         txtDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(currentAttempt.time)
         txtTime.text = SimpleDateFormat("HH:mm", Locale.GERMAN).format(currentAttempt.time)
         btnSetAmount.text = String.format("%s / %s", currentAttempt.pplCurrent, currentAttempt.pplMax)
+
 
         val imgPrefab = binding.foodPrefab
         val layoutContainer = binding.foodSelect
