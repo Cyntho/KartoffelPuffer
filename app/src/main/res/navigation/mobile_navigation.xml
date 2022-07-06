@@ -58,6 +58,12 @@
                 app:argType="integer"
                 android:defaultValue="-1"/>
     </fragment>
+    <fragment
+            android:id="@+id/navigation_reservation_confirmation"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations.ReservationConfirmation"
+            android:label="Reservation Confirmation"
+            tools:layout="@layout/fragment_reservation_confirmation"
+            />
 
 
 

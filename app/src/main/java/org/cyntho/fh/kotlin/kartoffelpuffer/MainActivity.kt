@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_reservations,
                 R.id.navigation_setup,
                 R.id.navigation_reservation_details,
+                R.id.navigation_reservation_confirmation,
                 R.id.navigation_dish_details
             )
         )

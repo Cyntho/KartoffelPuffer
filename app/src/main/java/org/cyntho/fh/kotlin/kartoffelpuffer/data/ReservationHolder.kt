@@ -8,5 +8,5 @@ data class ReservationHolder(
     var time: Timestamp,
     var pplCurrent: Int,
     var pplMax: Int,
-    var dishes: List<Dish>?
+    var dishes: MutableMap<Int, Int>?
 )

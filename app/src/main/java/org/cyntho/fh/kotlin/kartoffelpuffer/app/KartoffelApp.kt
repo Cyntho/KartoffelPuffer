@@ -43,6 +43,9 @@ class KartoffelApp : Application() {
     public fun setCurrentReservation(res: ReservationHolder){ _currentReservationAttempt = res}
     public fun getCurrentReservation(): ReservationHolder? { return _currentReservationAttempt }
 
+    public fun resetCurrentReservation(){ _currentReservationAttempt = null }
+
+
     // Allergies
     public fun setAllergyList(list: MutableList<AllergyWrapper>) { _allergyList = list}
     public fun getAllergyList(): MutableList<AllergyWrapper> { return _allergyList}

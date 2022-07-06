@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -24,7 +24,6 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.cio.*
 import io.ktor.utils.io.*
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
@@ -127,7 +126,6 @@ class ReservationDetail : Fragment() {
         val txtDishAmountPrefab = binding.txtPrefabAmount
         val btnDishDeletePrefab = binding.btnPrefabDelete
         val dishRowPrefab       = binding.dishEntryPrefab
-
         val dishContainer       = binding.dishesList
 
         // Load dishMap from arguments
@@ -169,6 +167,41 @@ class ReservationDetail : Fragment() {
         // clean up
         dishRowPrefab.removeAllViews()
         dishContainer.removeView(dishRowPrefab)
+
+
+        // Handle "next"/"cancel" buttons
+        val btnContinue = binding.dishAdd
+        val btnCancel   = binding.dishCancel
+
+        // Cancel Reservation? --> AlertDialog
+        btnCancel.setOnClickListener {
+            val diag = AlertDialog.Builder(requireContext())
+            diag.setTitle(R.string.alert_attention)
+            diag.setMessage("Wenn Sie jetzt abbrechen geht die Reservierung verloren!")
+            diag.setPositiveButton("Zurück zur Reservierung") {
+                    _, _ ->
+            }
+            diag.setNegativeButton("Reservierung abbrechen") {_, _ ->
+                // Reset and forward
+                app.resetCurrentReservation()
+                findNavController().navigate(R.id.navigation_home)
+            }
+            diag.show()
+        }
+
+        // Continue to confirmation
+        btnContinue.setOnClickListener {
+            // Save data and forward
+            val current = app.getCurrentReservation()
+            if (current == null){
+                println("app.getCurrentReservation() Shouldn't be null!")
+            } else {
+                current.dishes = dishMap
+                app.setCurrentReservation(current)
+                findNavController().navigate(R.id.navigation_reservation_confirmation)
+            }
+        }
+
 
         return root
     }

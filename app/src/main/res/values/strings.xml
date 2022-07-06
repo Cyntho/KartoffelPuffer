@@ -71,4 +71,10 @@
     <string name="cfgUUID">client_UUID</string>
 
 
+    <!-- Alert Dialogs -->
+    <string name="alert_attention">Vorsicht</string>
+    <string name="alert_success">Erfolg</string>
+    <string name="alert_failure">Fehlgeschlagen</string>
+
+
 </resources>
