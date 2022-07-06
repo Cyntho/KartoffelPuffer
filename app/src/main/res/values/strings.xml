@@ -54,7 +54,7 @@
     <string name="reservation_fee">Um Betrug vorzubeugen müssen wir Sie leider darum bitten einen Betrag von 4,99€ als Reservierungsgebühr zu bezahlen. Dieser Betrag wird später von Ihrer Rechnung abgezogen.</string>
 
     <!-- ReservationInfo -->
-    <string name="reservation_info_title">Informationen zu deiner Reservieung</string>
+    <string name="reservation_info_title">Informationen zu deiner \n Reservieung</string>
     <string name="cancel">Abbrechen</string>
     <!-- Text fields -->
     <string name="txt_imprint_text">

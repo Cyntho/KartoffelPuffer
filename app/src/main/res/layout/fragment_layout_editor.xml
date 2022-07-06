@@ -9,89 +9,89 @@
         >
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.25"
-                android:background="@color/app_background_admin"
-                android:baselineAligned="false"
-                android:gravity="center"
-                android:id="@+id/home_header"
-                android:orientation="horizontal">
+            android:id="@+id/home_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2."
+            android:background="@color/grid_taken"
+            android:baselineAligned="false"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
-                    android:id="@+id/btnDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="2"
-                    android:backgroundTint="#FFFFFF"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    app:cornerRadius="5dp"
-                    tools:text="27/06/2022" />
+                android:id="@+id/btnDate"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:backgroundTint="#FFFFFF"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:cornerRadius="5dp"
+                tools:text="27/06/2022" />
 
             <Button
-                    android:id="@+id/btnTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    app:cornerRadius="5dp"
-                    tools:text="10:25" />
+                android:id="@+id/btnTime"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:cornerRadius="5dp"
+                tools:text="10:25" />
 
         </LinearLayout>
 
         <View
-                android:id="@+id/black_border"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/black" />
+            android:id="@+id/black_border"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/black" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <TableLayout
-                    android:id="@+id/tableGrid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:orientation="horizontal"
-                    android:padding="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                android:id="@+id/tableGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:orientation="horizontal"
+                android:padding="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TableRow
-                        android:id="@+id/tableRow1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dip"
-                        android:layout_weight="0"
-                        android:background="@color/black"
-                        android:layoutMode="clipBounds"
-                        android:padding="0dip">
+                    android:id="@+id/tableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_weight="0"
+                    android:background="@color/black"
+                    android:layoutMode="clipBounds"
+                    android:padding="0dip">
 
                     <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnGrid1"
-                            style="@style/Button.Kotlin_Basics_1"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:visibility="gone"
-                            tools:ignore="SpeakableTextPresentCheck"
-                            android:background="@color/grid_empty"/>
+                        android:id="@+id/btnGrid1"
+                        style="@style/Button.Kotlin_Basics_1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@color/grid_empty"
+                        android:visibility="gone"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
                 </TableRow>
 
@@ -100,76 +100,56 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_WallMode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_weight="2"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/grid_wall"
+                android:text="@string/Wand" />
 
-            <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_TableMode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/grid_table"
+                android:text="@string/btn_table" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="@string/Wand"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btn_WallMode"
-                        android:background="@color/grid_wall"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="@string/btn_table"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btn_TableMode"
-                        android:background="@color/grid_table"/>
-
-                <Button
-                        android:text="@string/btn_confirm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btnSave"/>
-
-                <Button
-                        android:text="Test"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/btnTest"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatButton
-                        android:text="@string/btn_delete"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/grid_taken"
-                        android:id="@+id/btn_DeleteMode"
-                        />
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_DeleteMode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/roundedbutton"
+                android:backgroundTint="@color/grid_taken"
+                android:text="@string/btn_delete" />
 
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/roundedbuttongreen"
+            android:text="@string/btn_confirm" />
 
     </LinearLayout>
 

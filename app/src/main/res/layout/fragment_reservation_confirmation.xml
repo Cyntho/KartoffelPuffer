@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/reservation_info_title"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,20 +39,24 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Datum:" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Datum:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/reservation_info_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/app_background_header"
-                android:gravity="center_horizontal"
+                android:background="@drawable/roundedbuttongrey"
+                android:gravity="center|center_horizontal"
                 android:text="Datum"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 tools:ignore="TextContrastCheck" />
 
         </LinearLayout>
@@ -64,20 +69,24 @@
 
             <TextView
                 android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Uhrzeit:" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Uhrzeit:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/reservation_info_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/app_background_header"
-                android:gravity="center_horizontal"
+                android:background="@drawable/roundedbuttongrey"
+                android:gravity="center|center_horizontal"
                 android:text="Uhrzeit"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -89,20 +98,24 @@
 
             <TextView
                 android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Personen:" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="Personen:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/reservation_info_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@color/app_background_header"
-                android:gravity="center_horizontal"
+                android:background="@drawable/roundedbuttongrey"
+                android:gravity="center|center_horizontal"
                 android:text="Personen"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -111,15 +124,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Beschreibung" />
+            android:text="Vorbestellte Gerichte"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/reservation_info_disc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:height="300dp"
-            android:background="@color/app_background_header"
+            android:height="200dp"
+            android:background="@drawable/roundedbuttongrey"
+            android:padding="5dp"
             android:text="TextView"
             android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
@@ -130,19 +145,31 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/reservation_fee"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:textColor="@color/black" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reservation_info_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/roundedbuttongreen"
             android:text="Reservieren" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reservation_info_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Zurück" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/roundedbuttonred"
+            android:text="Zurück"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 
