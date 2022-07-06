@@ -15,6 +15,7 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentReservationConfirmationBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -75,8 +76,17 @@ class ReservationConfirmation : Fragment() {
                     val diag = AlertDialog.Builder(requireContext())
 
                     if (response.type == 0){
+
+                        //val reservedUntil = Timestamp(response.data.toLong())
+                        val reservedUntil = "aa:bb"
+
+                        /* val msg = "Die Reservierung wurde erfolgreich gespeichert!\n\n" +
+                                "Ihr Tisch wurde reserviert von: \n" +
+                                "${SimpleDateFormat("HH:mm", Locale.GERMAN).format(content.time)} Uhr " +
+                                "bis: ${SimpleDateFormat("HH:mm", Locale.GERMAN).format(reservedUntil)} Uhr"*/
+
                         diag.setTitle(R.string.alert_success)
-                        diag.setMessage("Die Reservierung wurde erfolgreich gespeichert!")
+                        diag.setMessage("Erfolgreich gespeichert!")
                         diag.setPositiveButton("Wunderbar!") {
                                 _, _ ->
                             findNavController().navigate(R.id.navigation_home)

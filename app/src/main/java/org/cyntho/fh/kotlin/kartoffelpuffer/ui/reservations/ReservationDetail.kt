@@ -147,7 +147,16 @@ class ReservationDetail : Fragment() {
 
                 textViewName.layoutParams = txtDishNamePrefab.layoutParams
                 textViewAmount.layoutParams = txtDishAmountPrefab.layoutParams
+                textViewAmount.gravity = txtDishAmountPrefab.gravity
+                textViewAmount.background = txtDishAmountPrefab.background
+                textViewAmount.setTextColor(txtDishAmountPrefab.textColors)
+
+
                 btnDelete.layoutParams = btnDishDeletePrefab.layoutParams
+                btnDelete.gravity = btnDishDeletePrefab.gravity
+                btnDelete.background = btnDishDeletePrefab.background
+                btnDelete.setTextColor(btnDishDeletePrefab.textColors)
+                btnDelete.text = btnDishDeletePrefab.text
 
                 textViewName.text = dish.name
                 textViewAmount.text = entry.value.toString()

@@ -125,14 +125,5 @@ class MainActivity : AppCompatActivity() {
                 println("Unable to load Dishes")
             }
         }
-
-        for (dish in (application as KartoffelApp).getDishList()){
-            println("Dish:")
-            println("ID: ${dish.dishId}\tName: ${dish.name}")
-            println("Allergies:")
-            for (allergy in dish.allergies){
-                print("${allergy.name} ")
-            }
-        }
     }
 }

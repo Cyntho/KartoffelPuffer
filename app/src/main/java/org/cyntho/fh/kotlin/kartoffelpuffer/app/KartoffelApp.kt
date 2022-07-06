@@ -26,6 +26,7 @@ class KartoffelApp : Application() {
     private var _allergyList: MutableList<AllergyWrapper> = mutableListOf()
     private var _dishList: MutableList<Dish> = mutableListOf()
     private var _dishMap: MutableMap<Int, Dish> = mutableMapOf()
+    private var _currentLayoutID: Int = -1
 
 
     public fun getUserName() : String{ return _userName }
@@ -44,6 +45,9 @@ class KartoffelApp : Application() {
     public fun getCurrentReservation(): ReservationHolder? { return _currentReservationAttempt }
 
     public fun resetCurrentReservation(){ _currentReservationAttempt = null }
+
+    public fun setCurrentLayoutID(id: Int) {_currentLayoutID = id }
+    public fun getCurrentLayoutID(): Int { return _currentLayoutID }
 
 
     // Allergies

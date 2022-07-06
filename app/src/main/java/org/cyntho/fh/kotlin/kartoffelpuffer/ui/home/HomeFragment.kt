@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     // Handling of times
     private var cal: Calendar = Calendar.getInstance()
     private var timeYear: Int = cal.get(Calendar.YEAR)
-    private var timeMonth: Int = cal.get(Calendar.MONTH)
+    private var timeMonth: Int = cal.get(Calendar.MONTH) + 1
     private var timeDay: Int = cal.get(Calendar.DAY_OF_MONTH)
     private var timeHour: Int = cal.get(Calendar.HOUR_OF_DAY)
     private var timeMinute: Int = cal.get(Calendar.MINUTE)
@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
 
         // Handling DatePicker
         val txtDate = binding.btnDate
-        txtDate.text = String.format("%d / %d / %d", timeDay, timeMonth + 1, timeYear)
+        txtDate.text = String.format("%d / %d / %d", timeDay, timeMonth, timeYear)
 
         if (context == null) return root
 
@@ -236,8 +236,9 @@ class HomeFragment : Fragment() {
                     _, _ ->
 
                     // set ref to current attempt
-                    ((activity!!.application) as KartoffelApp).setCurrentReservation(
-                        ReservationHolder(x, y, timestamp, 1, 4, null)
+                    val app = ((activity!!.application) as KartoffelApp)
+                    app.setCurrentReservation(
+                        ReservationHolder(app.getCurrentLayoutID(), x, y, timestamp, 1, 4, null)
                     )
                     findNavController().navigate(R.id.navigation_reservation_details)
                 }
@@ -266,9 +267,13 @@ class HomeFragment : Fragment() {
         }
 
         // ToDo Timestamp negativ???
-        val pack = NetPacket(System.currentTimeMillis(), (activity!!.application as KartoffelApp).getUserToken(), 0, timestamp.time.toString())
-        println("Sending: $pack")
+        val currentLayout = (activity!!.application as KartoffelApp).getCurrentLayoutID()
+        val selectedTime = SimpleDateFormat("dd.MM.yyyy - HH:mm", Locale.GERMAN).format(timestamp)
 
+
+        println("Requesting reservation list for layout [$currentLayout] at time: $selectedTime")
+
+        val pack = NetPacket(System.currentTimeMillis(), (activity!!.application as KartoffelApp).getUserToken(), currentLayout, timestamp.time.toString())
         val response = runBlocking {
             NetManager().send("/getReservationsFor", pack)
         }
@@ -278,6 +283,7 @@ class HomeFragment : Fragment() {
         }
 
         val test = GsonBuilder().create().fromJson(response.data, Array<ReservationWrapper>::class.java)
+        val app = (requireActivity().application as KartoffelApp)
         for (t in test){
             try {
                 if (array!!.arrayContents[t.x][t.y] == 2){
@@ -288,6 +294,9 @@ class HomeFragment : Fragment() {
 
                     // Store data for buttons
                     storedReservations[index] = Timestamp(t.time)
+
+                    // Store layout id
+                    app.setCurrentLayoutID(t.layout)
                 } else {
                     println("array[${t.x}][${t.y}] := ${array!!.arrayContents[t.x][t.y]}")
                 }

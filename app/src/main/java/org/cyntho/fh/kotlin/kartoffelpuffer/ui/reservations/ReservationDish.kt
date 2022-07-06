@@ -82,15 +82,16 @@ class ReservationDish : Fragment() {
             println(allergy)
 
 
+
             when (allergy.name){
-                "Fisch" -> btnFish.setBackgroundColor(Color.GREEN)
-                "Soja" -> btnSoy.setBackgroundColor(Color.GREEN)
-                "Gluten" -> btnGluten.setBackgroundColor(Color.GREEN)
-                "Eier" -> btnEggs.setBackgroundColor(Color.GREEN)
-                "Nüsse" -> btnNuts.setBackgroundColor(Color.GREEN)
-                "Lupinen" -> btnLupin.setBackgroundColor(Color.GREEN)
-                "Sesam" -> btnSesame.setBackgroundColor(Color.GREEN)
-                "Milch" -> btnMilk.setBackgroundColor(Color.GREEN)
+                "Fisch" -> btnFish.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Soja" -> btnSoy.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Gluten" -> btnGluten.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Eier" -> btnEggs.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Nüsse" -> btnNuts.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Lupinen" -> btnLupin.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Sesam" -> btnSesame.setBackgroundResource(R.drawable.roundedbuttongreen)
+                "Milch" -> btnMilk.setBackgroundResource(R.drawable.roundedbuttongreen)
                 else -> println("Weird allergy returned: ${allergy.name}")
             }
         }

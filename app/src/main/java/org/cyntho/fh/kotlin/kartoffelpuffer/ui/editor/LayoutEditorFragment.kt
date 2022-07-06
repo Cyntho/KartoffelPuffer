@@ -22,6 +22,7 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentLayoutEditorBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.*
+import java.sql.Timestamp
 import java.util.*
 
 class LayoutEditorFragment : Fragment() {
@@ -48,11 +49,6 @@ class LayoutEditorFragment : Fragment() {
         binding.btnTableMode.setOnClickListener { mode = 2 }
         binding.btnDeleteMode.setOnClickListener { mode = 3 }
         binding.btnSave.setOnClickListener {attemptSaving()}
-        binding.btnTest.setOnClickListener {
-
-            // ToDo --> Remove Test button..
-
-        }
 
         // Generate grid with static size
         val gridHorizontal = 7
