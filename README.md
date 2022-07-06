@@ -35,5 +35,5 @@ Note:<br>
 A Backend is required for full functionality, since all data (incl. images for dishes)
 are stored on the server.
 
-- My Backend is available here: [KartoffelPuffer Backend]("https://github.com/Cyntho/Kartoffelpufferbackend")
+- My Backend is available here: [KartoffelPuffer Backend](https://github.com/Cyntho/Kartoffelpufferbackend)
 - MySQL Database (used here: XAMPP/MySQL)
