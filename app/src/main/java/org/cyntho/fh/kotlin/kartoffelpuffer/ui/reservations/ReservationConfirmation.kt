@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.runBlocking
@@ -73,7 +75,8 @@ class ReservationConfirmation : Fragment() {
                 if (response == null){
                     println("Communication error")
                 } else {
-                    val diag = AlertDialog.Builder(requireContext())
+                    val diag = MaterialAlertDialogBuilder(requireContext())
+                    diag.background = ResourcesCompat.getDrawable(resources,R.drawable.roundedbutton,null)
 
                     if (response.type == 0){
 

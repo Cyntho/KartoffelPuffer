@@ -80,6 +80,8 @@
     <string name="adminReservationListTitle">Reservierungsliste</string>
     <string name="btn_logout">Logout</string>
     <string name="btn_back">Zurück</string>
+    <string name="btn_editLayout">Layout bearbeiten</string>
+    <string name="connection_refused">Verbindung mit dem Server fehlgeschlagen</string>
 
 
 </resources>

@@ -12,9 +12,11 @@ import android.widget.TableRow
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import io.ktor.util.*
 import kotlinx.coroutines.*
@@ -138,7 +140,8 @@ class HomeFragment : Fragment() {
             val reserved = storedReservations[id]
 
             // If table taken, display feedback and return
-            val diag = AlertDialog.Builder(context!!)
+            val diag = MaterialAlertDialogBuilder(requireContext())
+            diag.background = ResourcesCompat.getDrawable(resources,R.drawable.roundedbutton,null)
             if (reserved != null){
                 diag.setTitle(getString(R.string.Besetzt))
                 diag.setMessage("Dieser Tisch ist leider vergeben.\n" +
@@ -160,7 +163,7 @@ class HomeFragment : Fragment() {
                     // set ref to current attempt
                     val app = ((activity!!.application) as KartoffelApp)
                     app.setCurrentReservation(
-                        ReservationHolder(app.getCurrentLayoutID(), x, y, timestamp, 1, 4, null)
+                        ReservationHolder(app.getCurrentLayoutID(), x, y, timestamp.time, 1, 4, null)
                     )
                     findNavController().navigate(R.id.navigation_reservation_details)
                 }
@@ -202,7 +205,8 @@ class HomeFragment : Fragment() {
 
         if (layoutResponse == null){
 
-            val diag = AlertDialog.Builder(context!!)
+            val diag = MaterialAlertDialogBuilder(requireContext())
+            diag.background = ResourcesCompat.getDrawable(resources,R.drawable.roundedbutton,null)
             diag.setTitle("Connection failed")
             diag.setMessage("Unable to connect to the server. Make sure you are connected to the internet.")
             diag.setPositiveButton(android.R.string.ok) {_, _ -> }

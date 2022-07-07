@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import io.ktor.client.*
@@ -56,11 +58,16 @@ class ReservationDetail : Fragment() {
         val btnAddPeople = binding.btnAddPerson
         val btnRemPeople = binding.btnRemovePerson
 
+        val currentReservation = app.getCurrentReservation()
+        peopleCounter = currentReservation?.pplCurrent ?: 1
+
         btnAddPeople.setOnClickListener {
             if (peopleCounter < 4){
                 peopleCounter++
                 val tmp = "$peopleCounter / ${currentAttempt.pplMax}"
                 btnSetAmount.text = tmp
+                currentReservation!!.pplCurrent = peopleCounter
+                app.setCurrentReservation(currentReservation)
             }
         }
 
@@ -69,6 +76,8 @@ class ReservationDetail : Fragment() {
                 peopleCounter--
                 val tmp = "$peopleCounter / ${currentAttempt.pplMax}"
                 btnSetAmount.text = tmp
+                currentReservation!!.pplCurrent = peopleCounter
+                app.setCurrentReservation(currentReservation)
             }
         }
 
@@ -79,7 +88,7 @@ class ReservationDetail : Fragment() {
         val imgPrefab = binding.foodPrefab
         val layoutContainer = binding.foodSelect
 
-        // Handle dishes
+        // Handle dishes -> Download icons if needed
         for (dish in app.getDishList()){
             val link = "http://10.0.2.2:8080/static_dishes/${dish.iconHash}"
             val entry = ImageView(requireContext())
@@ -134,14 +143,6 @@ class ReservationDetail : Fragment() {
             layoutContainer.removeView(imgPrefab)
         }
 
-        // Check if we need to add stuff
-        val dishID     = arguments?.getInt("dish_id")     ?: -1
-        val dishAmount = arguments?.getInt("dish_amount") ?: -1
-
-        if (dishID != -1 && dishAmount != -1){
-            println("Dish with id $dishID should be added $dishAmount times.")
-        }
-
         // Handle for reservation pre-ordered dishes
         val txtDishNamePrefab   = binding.txtPrefabName
         val txtDishAmountPrefab = binding.txtPrefabAmount
@@ -149,49 +150,47 @@ class ReservationDetail : Fragment() {
         val dishRowPrefab       = binding.dishEntryPrefab
         val dishContainer       = binding.dishesList
 
-        // Load dishMap from arguments
-        val wrapper = arguments?.getString("wrapper")
-        println("Reservation_Details received wrapper: $wrapper")
+        //dishMap = app.getCurrentReservation()!!.dishes!!
+        if (app.getCurrentReservation()!!.dishes == null){
+            val tmp = app.getCurrentReservation()
+            tmp!!.dishes = mutableMapOf()
+            app.setCurrentReservation(tmp)
+        }
+        dishMap = app.getCurrentReservation()!!.dishes!!
 
-        if (wrapper != null){
-            val type = object : TypeToken<MutableMap<Int, Int>>() {}.type
-            dishMap = GsonBuilder().create().fromJson(wrapper, type)
+        for (entry in dishMap){
+            val dish = app.getDishById(entry.key) ?: continue
+            val ctx  = requireContext()
+
+            val textViewName    = TextView(ctx)
+            val textViewAmount  = TextView(ctx)
+            val btnDelete       = AppCompatButton(ctx)
+
+            textViewName.layoutParams = txtDishNamePrefab.layoutParams
+            textViewAmount.layoutParams = txtDishAmountPrefab.layoutParams
+            textViewAmount.gravity = txtDishAmountPrefab.gravity
+            textViewAmount.background = txtDishAmountPrefab.background
+            textViewAmount.setTextColor(txtDishAmountPrefab.textColors)
 
 
-            for (entry in dishMap){
-                val dish = app.getDishById(entry.key) ?: continue
-                val ctx  = requireContext()
+            btnDelete.layoutParams = btnDishDeletePrefab.layoutParams
+            btnDelete.gravity = btnDishDeletePrefab.gravity
+            btnDelete.background = btnDishDeletePrefab.background
+            btnDelete.setTextColor(btnDishDeletePrefab.textColors)
+            btnDelete.text = btnDishDeletePrefab.text
 
-                val textViewName    = TextView(ctx)
-                val textViewAmount  = TextView(ctx)
-                val btnDelete       = AppCompatButton(ctx)
+            textViewName.text = dish.name
+            textViewAmount.text = entry.value.toString()
+            btnDelete.setOnClickListener { handleListEntryDelete(dish.dishId) }
 
-                textViewName.layoutParams = txtDishNamePrefab.layoutParams
-                textViewAmount.layoutParams = txtDishAmountPrefab.layoutParams
-                textViewAmount.gravity = txtDishAmountPrefab.gravity
-                textViewAmount.background = txtDishAmountPrefab.background
-                textViewAmount.setTextColor(txtDishAmountPrefab.textColors)
+            val row = LinearLayout(ctx)
+            row.layoutParams = dishRowPrefab.layoutParams
 
+            row.addView(textViewName)
+            row.addView(textViewAmount)
+            row.addView(btnDelete)
 
-                btnDelete.layoutParams = btnDishDeletePrefab.layoutParams
-                btnDelete.gravity = btnDishDeletePrefab.gravity
-                btnDelete.background = btnDishDeletePrefab.background
-                btnDelete.setTextColor(btnDishDeletePrefab.textColors)
-                btnDelete.text = btnDishDeletePrefab.text
-
-                textViewName.text = dish.name
-                textViewAmount.text = entry.value.toString()
-                btnDelete.setOnClickListener { handleListEntryDelete(dish.dishId) }
-
-                val row = LinearLayout(ctx)
-                row.layoutParams = dishRowPrefab.layoutParams
-
-                row.addView(textViewName)
-                row.addView(textViewAmount)
-                row.addView(btnDelete)
-
-                dishContainer.addView(row)
-            }
+            dishContainer.addView(row)
         }
 
         // clean up
@@ -205,7 +204,8 @@ class ReservationDetail : Fragment() {
 
         // Cancel Reservation? --> AlertDialog
         btnCancel.setOnClickListener {
-            val diag = AlertDialog.Builder(requireContext())
+            val diag = MaterialAlertDialogBuilder(requireContext())
+            diag.background = ResourcesCompat.getDrawable(resources,R.drawable.roundedbutton,null)
             diag.setTitle(R.string.alert_attention)
             diag.setMessage("Wenn Sie jetzt abbrechen geht die Reservierung verloren!")
             diag.setPositiveButton("Zurück zur Reservierung") {

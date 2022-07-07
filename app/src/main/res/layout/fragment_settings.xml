@@ -159,6 +159,17 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnEditLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/roundedbuttongreen"
+                        android:text="@string/btn_editLayout"
+                        android:textColor="@color/textcolor"/>
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSettingsLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.ui.editor
 
 import android.graphics.Color
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +12,9 @@ import android.widget.TableRow
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
@@ -43,11 +46,28 @@ class LayoutEditorFragment : Fragment() {
         _binding = FragmentLayoutEditorBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
+        binding.btnWallMode.paintFlags = binding.btnWallMode.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         // Assign buttons to func
-        binding.btnWallMode.setOnClickListener { mode = 1 }
-        binding.btnTableMode.setOnClickListener { mode = 2 }
-        binding.btnDeleteMode.setOnClickListener { mode = 3 }
+        binding.btnWallMode.setOnClickListener {
+            mode = 1
+            binding.btnWallMode.paintFlags = binding.btnWallMode.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            binding.btnTableMode.paintFlags = 0
+            binding.btnDeleteMode.paintFlags = 0
+        }
+
+        binding.btnTableMode.setOnClickListener {
+            mode = 2
+            binding.btnWallMode.paintFlags = 0
+            binding.btnTableMode.paintFlags = binding.btnTableMode.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            binding.btnDeleteMode.paintFlags = 0
+        }
+        binding.btnDeleteMode.setOnClickListener {
+            mode = 3
+            binding.btnWallMode.paintFlags = 0
+            binding.btnTableMode.paintFlags = 0
+            binding.btnDeleteMode.paintFlags = binding.btnDeleteMode.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        }
         binding.btnSave.setOnClickListener {attemptSaving()}
 
         // Generate grid with static size
@@ -126,7 +146,8 @@ class LayoutEditorFragment : Fragment() {
             response = NetManager().send("updateLayout", pack)
         }
 
-        val diag = AlertDialog.Builder(context!!)
+        val diag = MaterialAlertDialogBuilder(requireContext())
+        diag.background = ResourcesCompat.getDrawable(resources,R.drawable.roundedbutton,null)
         if (response == null){
 
             diag.setTitle("Connection failed")
@@ -140,4 +161,5 @@ class LayoutEditorFragment : Fragment() {
 
         diag.show()
     }
+
 }

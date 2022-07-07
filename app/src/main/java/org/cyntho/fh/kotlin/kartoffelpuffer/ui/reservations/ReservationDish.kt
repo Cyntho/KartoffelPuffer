@@ -32,16 +32,6 @@ class ReservationDish : Fragment() {
         _binding = FragmentReservationDishBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val wrapper = arguments?.getString("wrapper")
-        if (wrapper != null){
-            println("Dish_Details received wrapper: $wrapper")
-
-            val type = object : TypeToken<MutableMap<Int, Int>>() {}.type
-            _backup = GsonBuilder().create().fromJson(wrapper, type)
-        } else {
-            _backup = mutableMapOf()
-        }
-
         val dishID = arguments?.getInt("dish_id") ?: -1
         println("Dish_Details received id: $dishID")
 
@@ -50,6 +40,7 @@ class ReservationDish : Fragment() {
             return root
         }
         val app = (activity!!.application) as KartoffelApp ?: return root
+        _backup = app.getCurrentReservation()!!.dishes!!
 
         dish = app.getDishById(dishID)
         if (dish == null) return root
@@ -117,17 +108,14 @@ class ReservationDish : Fragment() {
         binding.dishAdd.setOnClickListener {
 
             _backup[dishID] = dishCounter
-            println("setting dishID[$dishID] to $dishCounter")
 
-            val data = bundleOf(Pair("wrapper", GsonBuilder().create().toJson(_backup)))
-
-            println("Dish_Details sending wrapper. ${data.getString("wrapper")}")
-
-            findNavController().navigate(R.id.navigation_reservation_details, data)
+            val current = app.getCurrentReservation()!!
+            current.dishes = _backup
+            app.setCurrentReservation(current)
+            findNavController().navigate(R.id.navigation_reservation_details)
         }
         binding.dishCancel.setOnClickListener {
-            val data = bundleOf(Pair("wrapper", GsonBuilder().create().toJson(_backup)))
-            findNavController().navigate(R.id.navigation_reservation_details, data)
+            findNavController().navigate(R.id.navigation_reservation_details)
         }
 
         return root

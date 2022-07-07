@@ -22,20 +22,20 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/layout_name"
-                style="@style/background"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="2"
-                android:textColor="@color/textcolor"
-                android:textSize="20sp"
-                app:cornerRadius="5dp"
-                tools:text="27/06/2022" />
+                    android:id="@+id/btnDate"
+                    style="@style/background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2"
+                    android:textColor="@color/textcolor"
+                    android:textSize="20sp"
+                    app:cornerRadius="5dp"
+                    tools:text="27/06/2022"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/layout_validfrom"
+                android:id="@+id/btnTime"
                 style="@style/background"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"

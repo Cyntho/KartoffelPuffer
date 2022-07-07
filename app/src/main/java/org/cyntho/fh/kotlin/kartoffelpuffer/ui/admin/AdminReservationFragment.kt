@@ -40,7 +40,7 @@ class AdminReservationFragment : Fragment() {
         _binding = FragmentAdminReservationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val btnDatePicker = binding.btnDate
+        val btnDatePicker = binding.btnAdminReservationDate
         btnDatePicker.setOnClickListener {
             val datePicker = DatePickerDialog(
                 requireContext(),
@@ -110,7 +110,7 @@ class AdminReservationFragment : Fragment() {
 
                 button.setOnClickListener {
                     val bundle = bundleOf("reservation_id" to entry.id)
-                    findNavController().navigate(R.id.navigation_admin_reservation_details, bundle)
+                    findNavController().navigate(R.id.navigation_reservation_info, bundle)
                 }
 
                 currentContainer.addView(button)

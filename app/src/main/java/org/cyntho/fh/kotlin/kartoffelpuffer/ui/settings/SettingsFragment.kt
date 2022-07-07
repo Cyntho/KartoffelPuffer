@@ -126,6 +126,12 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.navigation_settings)
         }
 
+        val btnEditLayout = binding.btnEditLayout
+        btnEditLayout.setOnClickListener {
+            if (app.isAdmin() && app.displayAdminView()){
+                findNavController().navigate(R.id.navigation_layoutEditor)
+            }
+        }
 
 
 
