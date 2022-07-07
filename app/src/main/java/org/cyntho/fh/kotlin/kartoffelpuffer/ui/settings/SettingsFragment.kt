@@ -112,7 +112,7 @@ class SettingsFragment : Fragment() {
             app.setAdminView(isAdmin)
             app.save()
 
-            // ToDo: Handle displaying..
+            findNavController().navigate(R.id.navigation_settings)
         }
 
 

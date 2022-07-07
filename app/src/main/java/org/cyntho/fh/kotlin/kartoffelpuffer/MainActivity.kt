@@ -71,12 +71,12 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-
         val uuid = cfg.getString(getString(R.string.cfgUUID), UUID.randomUUID().toString()) ?: UUID.randomUUID().toString()
         val name: String = cfg.getString(getString(R.string.cfgUserName), "Unknown") ?: "Unknown"
 
         val app: KartoffelApp = application as KartoffelApp
         val serverResponse = runBlocking {
+            println("Registration for the first time.. [$uuid]")
             NetManager().register(uuid)
         }
 

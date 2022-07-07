@@ -86,6 +86,13 @@
             tools:layout="@layout/fragment_imprint"
             />
 
+    <fragment
+            android:id="@+id/navigation_reservation_info"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.reservations.ReservationInfo"
+            android:label="@string/title_reservations_detail"
+            tools:layout="@layout/fragment_reservation_info"
+            />
+
 
 
 

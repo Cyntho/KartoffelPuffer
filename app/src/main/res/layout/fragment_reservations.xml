@@ -34,7 +34,7 @@
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnMyReservationsPrefab2"
+                android:id="@+id/btnMyReservationsPrefab"
                 style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

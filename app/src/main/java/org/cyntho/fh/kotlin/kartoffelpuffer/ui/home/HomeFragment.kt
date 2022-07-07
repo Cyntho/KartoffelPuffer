@@ -14,7 +14,6 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.gson.GsonBuilder
 import io.ktor.util.*
@@ -28,7 +27,6 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
-import kotlin.coroutines.suspendCoroutine
 
 class HomeFragment : Fragment() {
 
@@ -74,7 +72,7 @@ class HomeFragment : Fragment() {
                 run {
                     txtDate.text = String.format("%d / %d / %d", dayOfMonth, month + 1, year)
                     timeYear = year
-                    timeMonth = month
+                    timeMonth = month + 1
                     timeDay = dayOfMonth
                     handleTimeChanged()
                 }
@@ -112,82 +110,6 @@ class HomeFragment : Fragment() {
             val background = binding.homeHeader
             background.setBackgroundColor(ContextCompat.getColor(context!!, R.color.app_background_admin))
         }
-
-        /*
-        ------------------------------------------------------------------------------------------------------
-                                                  BUILD MAIN VIEW HERE
-        ------------------------------------------------------------------------------------------------------ */
-
-        val layoutResponse: NetPacket? =
-            runBlocking {
-                NetManager().send(
-                    "/getCurrentLayout",
-                    NetPacket(
-                        System.currentTimeMillis(),
-                        (app.getUserToken()),
-                        0,
-                        ""
-                    )
-                )
-            }
-
-        if (layoutResponse == null){
-
-            val diag = AlertDialog.Builder(context!!)
-            diag.setTitle("Connection failed")
-            diag.setMessage("Unable to connect to the server. Make sure you are connected to the internet.")
-            diag.setPositiveButton(android.R.string.ok) {_, _ -> }
-            diag.show()
-            return root
-        }
-
-        // Max: 7x9
-        val wrapper = GsonBuilder().create().fromJson(layoutResponse.data, LayoutWrapper::class.java)
-
-        val prefab = binding.btnGrid1
-        var row = binding.tableRow1
-        array = wrapper.asArray2D()
-        var counter = 0
-        val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
-        val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
-        val colorTable = ContextCompat.getColor(context!!, R.color.grid_free)
-
-        for (y in 0 until wrapper.sizeY){
-            for (x in 0 until wrapper.sizeX){
-                val button = AppCompatButton(prefab.context)
-                button.layoutParams = prefab.layoutParams
-                button.text = ""
-                val index = counter
-
-                button.id = prefab.id + ++counter
-
-                idToCoordinateMap[index] = arrayOf(x, y, array!!.arrayContents[x][y])
-
-                button.setOnClickListener {
-                    handleButtonClick(index)
-                }
-
-                button.tag = "gridButton_$index"
-
-                when (array!!.arrayContents[x][y]){
-                    0 -> button.setBackgroundColor(colorEmpty)
-                    1 -> button.setBackgroundColor(colorWall)
-                    2 -> button.setBackgroundColor(colorTable)
-                }
-
-                row.addView(button)
-            }
-            // Add new row
-            row = TableRow(context!!)
-            row.layoutParams = binding.tableRow1.layoutParams
-            row.setBackgroundColor(Color.BLACK)
-            binding.tableGrid.addView(row)
-        }
-
-        // Remove prefab button
-        row.removeView(prefab)
-
-        prefab.setOnClickListener { handleButtonClick(0) }
 
         return root
     }
@@ -255,10 +177,102 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    private fun reBuildGrid(){
+        /*
+        ------------------------------------------------------------------------------------------------------
+                                                  BUILD MAIN VIEW HERE
+        ------------------------------------------------------------------------------------------------------ */
+
+        val app = requireActivity().application as KartoffelApp
+        storedReservations.clear()
+        idToCoordinateMap.clear()
+
+        val layoutResponse: NetPacket? =
+            runBlocking {
+                NetManager().send(
+                    "/getCurrentLayout",
+                    NetPacket(
+                        System.currentTimeMillis(),
+                        (app.getUserToken()),
+                        0,
+                        ""
+                    )
+                )
+            }
+
+        if (layoutResponse == null){
+
+            val diag = AlertDialog.Builder(context!!)
+            diag.setTitle("Connection failed")
+            diag.setMessage("Unable to connect to the server. Make sure you are connected to the internet.")
+            diag.setPositiveButton(android.R.string.ok) {_, _ -> }
+            diag.show()
+            return
+        }
+
+        // Max: 7x9
+        val wrapper = GsonBuilder().create().fromJson(layoutResponse.data, LayoutWrapper::class.java)
+
+        val gridPrefab = binding.tableGrid
+        val prefab = binding.btnGrid1
+        var row = binding.tableRow1
+        row.removeAllViews()
+
+        // Clear everything
+        array = wrapper.asArray2D()
+        var counter = 0
+
+        gridPrefab.removeAllViews()
+        gridPrefab.addView(row)
+
+        val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
+        val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
+        val colorTable = ContextCompat.getColor(context!!, R.color.grid_free)
+
+        for (y in 0 until wrapper.sizeY){
+            for (x in 0 until wrapper.sizeX){
+                val button = AppCompatButton(prefab.context)
+                button.layoutParams = prefab.layoutParams
+                button.text = ""
+                val index = counter
+
+                button.id = prefab.id + ++counter
+
+                idToCoordinateMap[index] = arrayOf(x, y, array!!.arrayContents[x][y])
+
+                button.setOnClickListener {
+                    handleButtonClick(index)
+                }
+
+                button.tag = "gridButton_$index"
+
+                when (array!!.arrayContents[x][y]){
+                    0 -> button.setBackgroundColor(colorEmpty)
+                    1 -> button.setBackgroundColor(colorWall)
+                    2 -> button.setBackgroundColor(colorTable)
+                }
+
+                row.addView(button)
+            }
+            // Add new row
+            row = TableRow(context!!)
+            row.layoutParams = binding.tableRow1.layoutParams
+            row.setBackgroundColor(Color.BLACK)
+            binding.tableGrid.addView(row)
+        }
+
+        // Remove prefab button
+        row.removeView(prefab)
+    }
+
     private fun handleTimeChanged(){
+
+        // Clear grid
+        reBuildGrid()
 
         val df = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.GERMAN)
         val tmp = df.parse("$timeYear.$timeMonth.$timeDay $timeHour:$timeMinute")
+        val app = (requireActivity().application as KartoffelApp)
         if (tmp != null) {
             timestamp = Timestamp(tmp.time)
             println("timestamp: ${timestamp}")
@@ -266,10 +280,28 @@ class HomeFragment : Fragment() {
             println("timestamp null")
         }
 
+        // Reset everything
+
+
         // ToDo Timestamp negativ???
-        val currentLayout = (activity!!.application as KartoffelApp).getCurrentLayoutID()
+        var currentLayout = (activity!!.application as KartoffelApp).getCurrentLayoutID()
         val selectedTime = SimpleDateFormat("dd.MM.yyyy - HH:mm", Locale.GERMAN).format(timestamp)
 
+        // Init current layout
+        if (currentLayout == -1){
+            runBlocking {
+                val rs = NetManager().send("/getCurrentLayout", NetPacket(System.currentTimeMillis(), app.getUserToken(), 0, ""))
+                if (rs != null){
+                    try {
+                        val layout = GsonBuilder().create().fromJson(rs.data, LayoutWrapper::class.java)
+                        currentLayout = layout.id
+                        app.setCurrentLayoutID(currentLayout)
+                    } catch (ex: Exception){
+                        ex.printStackTrace()
+                    }
+                }
+            }
+        }
 
         println("Requesting reservation list for layout [$currentLayout] at time: $selectedTime")
 
@@ -283,7 +315,6 @@ class HomeFragment : Fragment() {
         }
 
         val test = GsonBuilder().create().fromJson(response.data, Array<ReservationWrapper>::class.java)
-        val app = (requireActivity().application as KartoffelApp)
         for (t in test){
             try {
                 if (array!!.arrayContents[t.x][t.y] == 2){

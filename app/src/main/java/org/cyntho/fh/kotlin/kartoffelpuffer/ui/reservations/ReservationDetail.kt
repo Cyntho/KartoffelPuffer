@@ -53,7 +53,7 @@ class ReservationDetail : Fragment() {
         val txtTime = binding.dishCountp
         val btnSetAmount = binding.btnReservationSize1
 
-        /*val btnAddPeople = binding.btnAddPerson
+        val btnAddPeople = binding.btnAddPerson
         val btnRemPeople = binding.btnRemovePerson
 
         btnAddPeople.setOnClickListener {
@@ -71,9 +71,6 @@ class ReservationDetail : Fragment() {
                 btnSetAmount.text = tmp
             }
         }
-         */
-
-
 
         txtDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(currentAttempt.time)
         txtTime.text = SimpleDateFormat("HH:mm", Locale.GERMAN).format(currentAttempt.time)

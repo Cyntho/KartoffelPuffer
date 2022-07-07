@@ -74,7 +74,7 @@ class ReservationsFragment : Fragment() {
 
                 button.setOnClickListener {
                     val bundle = bundleOf("reservation_id" to entry.id)
-                    findNavController().navigate(R.id.navigation_reservation_details, bundle)
+                    findNavController().navigate(R.id.navigation_reservation_info, bundle)
                 }
 
                 button.text = label
