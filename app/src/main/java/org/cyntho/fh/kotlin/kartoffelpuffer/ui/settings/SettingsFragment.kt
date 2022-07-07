@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -52,17 +53,33 @@ class SettingsFragment : Fragment() {
         /* --------------- Assign bindings and handler --------------------------- */
 
         val root: View = binding.root
+        val app = requireActivity().application as KartoffelApp
+
+        // Text field: Username
+        val txtUsername: EditText = binding.txtUsername
+        txtUsername.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (txtUsername.text.isNotEmpty())
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                    updateUsername(txtUsername, app)
+                    requireActivity().hideSoftKeyboard()
+                    return@OnKeyListener true
+                }
+            false
+        })
 
         // DarkMode Switch handler
         val swDarkMode: Switch = binding.switchDarkMode
         swDarkMode.setOnClickListener {
+            updateUsername(txtUsername, app)
             onDarkModeToggledHandler(swDarkMode.isChecked)
             findNavController().navigate(R.id.navigation_settings)
+
         }
 
         // Notifications Switch handler
         val swNotification: Switch = binding.switchNotifications
         swNotification.setOnClickListener {
+            updateUsername(txtUsername, app)
             onNotificationsToggleHandler(swNotification.isChecked)
             findNavController().navigate(R.id.navigation_settings)
         }
@@ -73,32 +90,10 @@ class SettingsFragment : Fragment() {
             it.findNavController().navigate(R.id.navigation_imprint)
         }
 
-        // Text field: Username
-        val txtUsername: EditText = binding.txtUsername
-        txtUsername.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                val app = requireActivity().application as KartoffelApp
-                runBlocking {
-                    NetManager().send(
-                        "/setUsername",
-                        NetPacket(
-                            System.currentTimeMillis(),
-                            app.getUserToken(),
-                            0,
-                            txtUsername.text.toString()
-                        )
-                    )
-                    println("Sending Username " + txtUsername.text.toString())
-                }
-                return@OnKeyListener true
-            }
-            false
-        })
         /* --------------- Initialize data from Settings --------------------------- */
         // See also: https://developer.android.com/training/data-storage/shared-preferences
 
         // Load saved settings
-        val app = requireActivity().application as KartoffelApp
         val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return root
 
         swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
@@ -163,12 +158,38 @@ class SettingsFragment : Fragment() {
         return root
     }
 
+    private fun updateUsername(
+        txtUsername: EditText,
+        app: KartoffelApp
+    ) {
+        println("Sending Username " + txtUsername.text.toString())
+        var netpacket: NetPacket? = null
+        runBlocking {
+            netpacket = NetManager().send(
+                "/setUsername",
+                NetPacket(
+                    System.currentTimeMillis(),
+                    app.getUserToken(),
+                    0,
+                    txtUsername.text.toString()
+                )
+            )
+            if (netpacket == null) {
+                println("Server Response Empty")
+            } else if (netpacket!!.type == 0) {
+                app.setUserName(txtUsername.text.toString())
+                app.save()
+                println("Name change success")
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
 
         val userField = binding.txtUsername
         if (!userField.text.equals("") && userField.text.length > 3) {
-            val app = (activity!!.application as KartoffelApp)
+            val app = (requireActivity().application as KartoffelApp)
             app.setUserName(userField.text.toString())
             app.save()
         }
@@ -204,9 +225,10 @@ class SettingsFragment : Fragment() {
         println("Notifications are now: ${if (mode) "on" else "off"}")
     }
 
-    fun Activity.hideSoftKeyboard(editText: EditText) {
-        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-            hideSoftInputFromWindow(editText.windowToken, 0)
+    fun Activity.hideSoftKeyboard() {
+        currentFocus?.let {
+            val inputMethodManager = ContextCompat.getSystemService(this, InputMethodManager::class.java)!!
+            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 }
