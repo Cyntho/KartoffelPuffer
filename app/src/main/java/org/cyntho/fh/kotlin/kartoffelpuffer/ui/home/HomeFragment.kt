@@ -190,6 +190,10 @@ class HomeFragment : Fragment() {
         storedReservations.clear()
         idToCoordinateMap.clear()
 
+        val df = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.GERMAN)
+        val tmp = df.parse("$timeYear.$timeMonth.$timeDay $timeHour:$timeMinute")
+        val desired = Timestamp(tmp!!.time)
+
         val layoutResponse: NetPacket? =
             runBlocking {
                 NetManager().send(
@@ -198,7 +202,7 @@ class HomeFragment : Fragment() {
                         System.currentTimeMillis(),
                         (app.getUserToken()),
                         0,
-                        ""
+                        GsonBuilder().create().toJson(desired)
                     )
                 )
             }
