@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dish_details,
                 R.id.navigation_admin_reservation,
                 R.id.navigation_admin_reservation_details,
+                R.id.navigation_admin_layout_manager,
                 R.id.navigation_layoutEditor
             )
         )

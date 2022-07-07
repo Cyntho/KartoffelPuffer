@@ -3,25 +3,19 @@ package org.cyntho.fh.kotlin.kartoffelpuffer.ui.editor
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.graphics.Paint
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TableRow
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonArray
-import com.google.gson.JsonParser
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.runBlocking
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
@@ -29,7 +23,6 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentLayoutEditorBind
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.*
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class LayoutEditorFragment : Fragment() {
@@ -40,6 +33,7 @@ class LayoutEditorFragment : Fragment() {
     private val binding get() = _binding!!
     private var mode: Int = 1 // 1 := wall, 2 := table, 0 := empty
     private var arr: Array2D = Array2D(7, 9)
+    private var layoutID: Int = -1
 
     private var timeYear: Int = Calendar.getInstance().get(Calendar.YEAR)
     private var timeMonth: Int = Calendar.getInstance().get(Calendar.MONTH)
@@ -78,7 +72,7 @@ class LayoutEditorFragment : Fragment() {
         }
         binding.btnSave.setOnClickListener {attemptSaving()}
         binding.btnLayoutEditorBack.setOnClickListener {
-            findNavController().navigate(R.id.navigation_settings)
+            findNavController().navigate(R.id.navigation_admin_layout_manager)
         }
 
         // Pick time
@@ -101,13 +95,28 @@ class LayoutEditorFragment : Fragment() {
             datePicker.show()
         }
 
-
         // Generate grid with static size
-        val gridHorizontal = 7
-        val gridVertical   = 9
+        var gridHorizontal = 7
+        var gridVertical   = 9
 
         val pref = binding.btnGrid1
         var row = binding.tableRow1
+
+
+        // Edit something?
+        var layoutWrapper: LayoutWrapper? = null
+        if (arguments != null && arguments!!.get("layout_wrapper") != null){
+            try {
+                layoutWrapper = GsonBuilder().create().fromJson(arguments!!.get("layout_wrapper").toString(), LayoutWrapper::class.java)
+            } catch (ignored: Exception){}
+        }
+
+        if (layoutWrapper != null){
+            gridVertical = layoutWrapper.sizeY
+            gridHorizontal = layoutWrapper.sizeX
+            layoutID = layoutWrapper.id
+            binding.txtLayoutEditorName.setText(layoutWrapper.name)
+        }
 
         for (x in 0 until gridVertical){
             for (y in 0 until gridHorizontal){
@@ -116,6 +125,23 @@ class LayoutEditorFragment : Fragment() {
                 val button = AppCompatButton(context!!)
                 button.layoutParams = pref.layoutParams
                 button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_empty))
+
+                // Load?
+                if (layoutWrapper?.data != null && layoutWrapper.data!!.size > index){
+                    val oldMode = layoutWrapper.data?.get(index) ?: 0
+                    when (oldMode){
+                        1 -> {
+                            button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_wall))
+                        }
+                        2 -> {
+                            button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_table))
+                        }
+                        else -> {
+                            button.setBackgroundColor(ContextCompat.getColor(context!!, R.color.grid_empty))
+                        }
+                    }
+                    arr.arrayContents[y][x] = oldMode
+                }
 
                 button.id = (pref.id + index)
                 button.text = index.toString()
@@ -132,7 +158,6 @@ class LayoutEditorFragment : Fragment() {
                         }
                     }
                     arr.arrayContents[y][x] = mode // axis reverse :c
-                    println("Array[$y][$x] = $mode")
                 }
                 row.addView(button)
             }
@@ -153,7 +178,7 @@ class LayoutEditorFragment : Fragment() {
         val t = timer.parse("$timeYear-${timeMonth}-$timeDayOfMonth")
 
         val wrapper = LayoutWrapper(
-            -1,
+            layoutID,
             arr.width,
             arr.height,
             binding.txtLayoutEditorName.text.toString(),

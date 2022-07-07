@@ -36,30 +36,29 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/dishes_list"
+                android:id="@+id/layoutEntryContainerPref"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/dishEntryPrefab"
+                    android:id="@+id/layoutEntryPrefab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/txtPrefabName"
+                        android:id="@+id/txtLayoutNamePrefab"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Name des Gerichts"
                         android:textColor="@color/textcolor"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnPrefabDelete2"
+                        android:id="@+id/btnEditLayoutEntryPrefab"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -69,7 +68,7 @@
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnPrefabDelete"
+                        android:id="@+id/btnDeleteLayoutPrefab"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -83,7 +82,7 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dish_add"
+            android:id="@+id/btnAddNewLayout"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="40dp"
@@ -93,7 +92,7 @@
             android:text="Neues Layout" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dish_cancel"
+            android:id="@+id/btnLayoutManagerBack"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="40dp"
