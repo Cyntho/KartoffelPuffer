@@ -42,11 +42,13 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_settings,
                 R.id.navigation_home,
-                R.id.navigation_reservations,
                 R.id.navigation_setup,
+
+                R.id.navigation_reservations,
                 R.id.navigation_reservation_details,
                 R.id.navigation_reservation_confirmation,
-                R.id.navigation_dish_details
+                R.id.navigation_dish_details,
+                R.id.navigation_admin_reservation
             )
         )
 

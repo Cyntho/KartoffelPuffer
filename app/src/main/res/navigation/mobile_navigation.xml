@@ -65,6 +65,13 @@
             tools:layout="@layout/fragment_reservation_confirmation"
             />
 
+    <fragment
+            android:id="@+id/navigation_admin_reservation"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.admin.AdminReservationFragment"
+            android:label="@string/adminReservationListTitle"
+            tools:layout="@layout/fragment_admin_reservation"
+            />
+
 
 
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -93,6 +94,8 @@ class SettingsFragment : Fragment() {
                 mgr.login(token, txtCode.text.toString())
             }
 
+            println("isAdmin: $isAdmin")
+
             app.setAdmin(isAdmin)
             app.setAdminView(isAdmin)
 
@@ -138,6 +141,12 @@ class SettingsFragment : Fragment() {
             putBoolean(getString(R.string.cfgDarkMode), mode)
             apply()
         }
+        if (mode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         println("DarkMode is now: ${if (mode) "on" else "off"}")
     }
 

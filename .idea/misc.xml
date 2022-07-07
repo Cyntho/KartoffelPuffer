@@ -10,12 +10,13 @@
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_home.xml" value="0.13609467455621302" />
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_layout_editor.xml" value="0.30625" />
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservation_confirmation.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservation_detail.xml" value="0.67" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservation_detail.xml" value="0.5" />
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservation_dish.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservation_info.xml" value="0.5541666666666667" />
-        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservations.xml" value="0.67" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_reservations.xml" value="0.5" />
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/layout/fragment_setup.xml" value="0.2765957446808511" />
+        <entry key="..\:/Users/malte/IdeaProjects/Kotlin_Basics_1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33229166666666665" />
       </map>
     </option>
   </component>

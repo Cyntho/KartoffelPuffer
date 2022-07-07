@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.gson.GsonBuilder
+import kotlinx.coroutines.runBlocking
+import org.cyntho.fh.kotlin.kartoffelpuffer.R
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentReservationsBinding
-import java.text.SimpleDateFormat
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.ReservationWrapper
+import java.sql.Timestamp
 import java.util.*
 
 class ReservationsFragment : Fragment() {
@@ -30,11 +36,45 @@ class ReservationsFragment : Fragment() {
         _binding = FragmentReservationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+        // Forward to admin view, if authorized
+
+
+
         // Load app and current reservation. Return on failure
         val app: KartoffelApp = activity!!.application as KartoffelApp ?: return root
-        val currentAttempt = app.getCurrentReservation()?: return root
+        if (app.isAdmin() && app.displayAdminView()){
+            println("Forwarding..")
+            findNavController().navigate(R.id.navigation_admin_reservation)
+        }
 
-        // Set references
+        // Not an admin, display own reservations
+        val btnPrefab = binding.btnMyReservationsPrefab
+        val containerBox = binding.reservationsLayoutContainer
+
+        var response: NetPacket? = null
+
+        runBlocking {
+            response = NetManager().send("/listReservations", NetPacket(System.currentTimeMillis(), app.getUserToken(), 0,
+                GsonBuilder().create().toJson(Timestamp(System.currentTimeMillis()))))
+        }
+        if (response != null && response!!.type == 0){
+            println("Response: $response")
+            val raw = GsonBuilder().create().fromJson(response!!.data, Array<ReservationWrapper>::class.java)
+            val list = raw.asList().toMutableList()
+
+            for (entry in list){
+                println("entry. $entry")
+
+                val button = AppCompatButton(requireContext())
+                button.layoutParams = btnPrefab.layoutParams
+                button.background = btnPrefab.background
+                //button.text = entry.start.toString()
+
+                containerBox.addView(button)
+            }
+            containerBox.removeView(btnPrefab)
+        }
 
 
 

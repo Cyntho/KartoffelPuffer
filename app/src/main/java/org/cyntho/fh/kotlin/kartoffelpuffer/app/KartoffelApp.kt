@@ -2,6 +2,7 @@ package org.cyntho.fh.kotlin.kartoffelpuffer.app
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import io.ktor.http.*
 import io.ktor.util.*
 import kotlinx.coroutines.*
@@ -86,5 +87,6 @@ class KartoffelApp : Application() {
             any.printStackTrace()
         }
     }
+
 
 }
