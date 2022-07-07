@@ -1,3 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App & Page names -->
+    <string name="app_name">Kartoffelpuffer</string>
+    <string name="title_home">Start</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="title_reservations">Reservierungen</string>
+    <string name="title_imprint">Impressum</string>
+
+    <!-- Buttons -->
+    <string name="btn_imprint">Impressum</string>
+    <string name="btn_adminCode">Admin Code</string>
+    <string name="btn_adminCodeFormat">#0Ac0B76</string>
+    <string name="btn_confirm">Bestätigen</string>
+    <string name="btn_table">Tisch</string>
+    <string name="btn_delete">Löschen</string>
+
+    <!-- Settings UI -->
+    <string name="lbl_DarkMode">Dark mode</string>
+    <string name="lbl_Notifications">Benachrichtigungen</string>
+    <string name="lbl_username">Name</string>
+    <string name="lbl_fontsize">Schriftgröße</string>
+    <string name="lbl_adminCode">Admin Code</string>
+
+    <!-- Admin Reservation-->
+    <string name="res_date">Reservierungen am:</string>
+
+    <!-- Create Dish-->
+    <string name="title_createDish">Gericht erstellen</string>
+
+    <!-- Main screen UI -->
+    <string name="Wand">Wand</string>
+    <string name="Besetzt">Besetzt</string>
+    <string name="Frei">Frei</string>
+    <string name="lbl_date">Datum</string>
+    <string name="lbl_time">Uhrzeit</string>
+    <string name="choose_new_date">Datum wählen</string>
+    <string name="choose_new_time">Uhrzeit wählen</string>
+
+    <!-- Config File -->
+    <string name="cfgDarkMode">cfgDarkMode</string>
+    <string name="cfgNotifications">cfgNotifications</string>
+    <string name="cfgUserToken">cfgUserToken</string>
+    <string name="cfgUserName">cfgUserName</string>
+
+    <!-- Networking -->
+    <string name="backend_host">10.0.2.2</string>
+    <string name="backend_port">8080</string>
+
+    <!-- Dish -->
+    <string name="title_reservations_detail">Reservierung</string>
+    <string name="title_reservations_dish">Informationen zum Gericht</string>
+    <string name="fav_food">Unsere beliebtesten Gerichte:</string>
+
+    <string name="reservation_fee">Um Betrug vorzubeugen müssen wir Sie leider darum bitten einen Betrag von 4,99€ als Reservierungsgebühr zu bezahlen. Dieser Betrag wird später von Ihrer Rechnung abgezogen.</string>
+
+    <!-- ReservationInfo -->
+    <string name="reservation_info_title">Informationen zu deiner \n Reservieung</string>
+    <string name="cancel">Abbrechen</string>
+    <!-- Text fields -->
+    <string name="txt_imprint_text">
+        <b>Impressum</b>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+        Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.
+        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+    </string>
+    <string name="title_setup">Setup</string>
+    <string name="txtWelcome">Geben Sie bitte Ihren Namen ein</string>
+    <string name="btn_authAsAdmin">Authentifizieren</string>
+    <string name="cfgUUID">client_UUID</string>
+
+
+    <!-- Alert Dialogs -->
+    <string name="alert_attention">Vorsicht</string>
+    <string name="alert_success">Erfolg</string>
+    <string name="alert_failure">Fehlgeschlagen</string>
+
+
 </resources>

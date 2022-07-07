@@ -42,13 +42,12 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnDate"
+                    style="@style/background"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/roundedbutton"
                     android:gravity="center"
-                    android:textColor="#000000"
                     android:textSize="20sp"
                     app:cornerRadius="5dp"
                     tools:text="27/06/2022" />
@@ -75,13 +74,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/res_date"
                 android:textAlignment="center"
-                android:textColor="@color/black" />
+                android:textColor="@color/textcolor" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button"
+                style="@style/background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
                 android:width="300dp"
                 android:height="100dp"
                 android:maxWidth="350dp"

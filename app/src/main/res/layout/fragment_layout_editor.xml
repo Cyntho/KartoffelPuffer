@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.editor.LayoutEditorFragment"
-        >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_background_main"
+    tools:context=".ui.editor.LayoutEditorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,28 +22,26 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDate"
+                style="@style/background"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="2"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#000000"
                 android:textSize="20sp"
                 app:cornerRadius="5dp"
                 tools:text="27/06/2022" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnTime"
+                style="@style/background"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#000000"
                 android:textSize="20sp"
                 app:cornerRadius="5dp"
                 tools:text="10:25" />

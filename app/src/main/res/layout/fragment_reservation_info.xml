@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:text="@string/reservation_info_title"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,20 +49,19 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="Datum:"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/reservation_info_date"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundedbuttongrey"
                 android:gravity="center|center_horizontal"
                 android:text="Datum"
-                android:textColor="@color/white"
                 android:textSize="20sp"
                 tools:ignore="TextContrastCheck" />
 
@@ -83,20 +82,19 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="Uhrzeit:"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/reservation_info_time"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundedbuttongrey"
                 android:gravity="center|center_horizontal"
                 android:text="Uhrzeit"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -116,20 +114,19 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="Personen:"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/reservation_info_size"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundedbuttongrey"
                 android:gravity="center|center_horizontal"
                 android:text="Personen"
-                android:textColor="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -140,18 +137,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Vorbestellte Gerichte"
-            android:textColor="@color/black" />
+            android:textColor="@color/textcolor" />
 
         <TextView
             android:id="@+id/reservation_info_disc"
+            style="@style/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:height="300dp"
-            android:background="@drawable/roundedbuttongrey"
             android:padding="5dp"
             android:text="TextView"
-            android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatButton

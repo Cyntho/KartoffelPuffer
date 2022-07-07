@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/title_reservations_detail"
-        android:textColor="@color/black"
+        android:textColor="@color/textcolor"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,19 +48,18 @@
                 android:layout_weight="2"
                 android:gravity="center|center_horizontal"
                 android:text="Datum:"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/background"
                 android:id="@+id/reservation_date_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundedbuttongrey"
-                android:text="Button"
-                android:textColor="@color/white" />
+                android:text="Button" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,19 +77,18 @@
                 android:layout_weight="2"
                 android:gravity="center|center_horizontal"
                 android:text="Uhrzeit:"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/background"
                 android:id="@+id/dish_countp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundedbuttongrey"
-                android:text="Button"
-                android:textColor="@color/white" />
+                android:text="Button" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,19 +106,18 @@
                 android:layout_weight="2"
                 android:gravity="center|center_horizontal"
                 android:text="Personen:"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/background"
                 android:id="@+id/btnReservationSize1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/roundedbuttongrey"
-                android:text="Button"
-                android:textColor="@color/white" />
+                android:text="Button" />
         </LinearLayout>
 
         <TextView
@@ -132,19 +129,18 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:text="Beschreibung"
-            android:textColor="@color/black"
+            android:textColor="@color/textcolor"
             android:textSize="20sp" />
 
         <TextView
+            style="@style/background"
             android:id="@+id/reservation_info_disc2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:height="300dp"
-            android:background="@drawable/roundedbuttongrey"
             android:padding="5dp"
             android:text="TextView"
-            android:textColor="@color/white"
             android:textSize="20sp"
             tools:ignore="TextContrastCheck" />
 
