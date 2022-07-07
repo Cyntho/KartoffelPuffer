@@ -87,7 +87,7 @@
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:textColor="@color/black"
+                android:textColor="@color/textcolor"
                 android:textColorHint="@color/white" />
 
         </LinearLayout>
@@ -124,7 +124,8 @@
                 android:maxLength="7"
                 android:minHeight="48dp"
                 android:selectAllOnFocus="true"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/textcolor" />
 
         </LinearLayout>
 
