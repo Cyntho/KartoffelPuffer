@@ -53,18 +53,33 @@ class SettingsFragment : Fragment() {
         /* --------------- Assign bindings and handler --------------------------- */
 
         val root: View = binding.root
+        val app = requireActivity().application as KartoffelApp
+
+        // Text field: Username
+        val txtUsername: EditText = binding.txtUsername
+        txtUsername.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (txtUsername.text.isNotEmpty())
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                    updateUsername(txtUsername, app)
+                    requireActivity().hideSoftKeyboard()
+                    return@OnKeyListener true
+                }
+            false
+        })
 
         // DarkMode Switch handler
         val swDarkMode: Switch = binding.switchDarkMode
         swDarkMode.setOnClickListener {
+            updateUsername(txtUsername, app)
             onDarkModeToggledHandler(swDarkMode.isChecked)
             findNavController().navigate(R.id.navigation_settings)
-            //requireActivity().hideSoftKeyboard()
+
         }
 
         // Notifications Switch handler
         val swNotification: Switch = binding.switchNotifications
         swNotification.setOnClickListener {
+            updateUsername(txtUsername, app)
             onNotificationsToggleHandler(swNotification.isChecked)
             findNavController().navigate(R.id.navigation_settings)
         }
@@ -75,40 +90,10 @@ class SettingsFragment : Fragment() {
             it.findNavController().navigate(R.id.navigation_imprint)
         }
 
-        // Text field: Username
-        val txtUsername: EditText = binding.txtUsername
-        txtUsername.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (txtUsername.text.isNotEmpty())
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                    println("Sending Username " + txtUsername.text.toString())
-                    val app = requireActivity().application as KartoffelApp
-                    var netpacket: NetPacket? = null
-                    runBlocking {
-                        netpacket = NetManager().send(
-                            "/setUsername",
-                            NetPacket(
-                                System.currentTimeMillis(),
-                                app.getUserToken(),
-                                0,
-                                txtUsername.text.toString()
-                            )
-                        )
-                        if (netpacket == null) {
-                            println("Server Response Empty")
-                        } else if (netpacket!!.type == 0) {
-                            println("Name change success")
-                        }
-                    }
-                    requireActivity().hideSoftKeyboard()
-                    return@OnKeyListener true
-                }
-            false
-        })
         /* --------------- Initialize data from Settings --------------------------- */
         // See also: https://developer.android.com/training/data-storage/shared-preferences
 
         // Load saved settings
-        val app = requireActivity().application as KartoffelApp
         val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return root
 
         swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
@@ -171,6 +156,32 @@ class SettingsFragment : Fragment() {
 
 
         return root
+    }
+
+    private fun updateUsername(
+        txtUsername: EditText,
+        app: KartoffelApp
+    ) {
+        println("Sending Username " + txtUsername.text.toString())
+        var netpacket: NetPacket? = null
+        runBlocking {
+            netpacket = NetManager().send(
+                "/setUsername",
+                NetPacket(
+                    System.currentTimeMillis(),
+                    app.getUserToken(),
+                    0,
+                    txtUsername.text.toString()
+                )
+            )
+            if (netpacket == null) {
+                println("Server Response Empty")
+            } else if (netpacket!!.type == 0) {
+                app.setUserName(txtUsername.text.toString())
+                app.save()
+                println("Name change success")
+            }
+        }
     }
 
 
