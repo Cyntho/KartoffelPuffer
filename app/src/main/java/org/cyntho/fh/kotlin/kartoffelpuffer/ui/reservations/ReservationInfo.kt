@@ -75,7 +75,7 @@ class ReservationInfo : Fragment() {
 
         var tmp = ""
         for (entry in wrapper.dishes!!){
-            tmp = "${entry.value}x ${app.getDishById(entry.key)} \n$tmp"
+            tmp = "${entry.value}x ${app.getDishById(entry.key)!!.name} \n$tmp"
         }
 
         txtListe.text = tmp

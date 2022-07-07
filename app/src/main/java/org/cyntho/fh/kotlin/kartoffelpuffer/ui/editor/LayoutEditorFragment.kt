@@ -69,6 +69,9 @@ class LayoutEditorFragment : Fragment() {
             binding.btnDeleteMode.paintFlags = binding.btnDeleteMode.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         }
         binding.btnSave.setOnClickListener {attemptSaving()}
+        binding.btnLayoutEditorBack.setOnClickListener {
+
+        }
 
         // Generate grid with static size
         val gridHorizontal = 7
