@@ -1,12 +1,16 @@
 package org.cyntho.fh.kotlin.kartoffelpuffer.ui.settings
 
+import android.app.Activity
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isInvisible
@@ -23,7 +27,9 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.ActivityMainBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentSettingsBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
 import org.cyntho.fh.kotlin.kartoffelpuffer.ui.setup.SetupFragment
+import org.w3c.dom.Text
 
 class SettingsFragment : Fragment() {
 
@@ -32,9 +38,10 @@ class SettingsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         settingsViewModel =
@@ -68,7 +75,25 @@ class SettingsFragment : Fragment() {
 
         // Text field: Username
         val txtUsername: EditText = binding.txtUsername
-
+        txtUsername.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                val app = requireActivity().application as KartoffelApp
+                runBlocking {
+                    NetManager().send(
+                        "/setUsername",
+                        NetPacket(
+                            System.currentTimeMillis(),
+                            app.getUserToken(),
+                            0,
+                            txtUsername.text.toString()
+                        )
+                    )
+                    println("Sending Username " + txtUsername.text.toString())
+                }
+                return@OnKeyListener true
+            }
+            false
+        })
         /* --------------- Initialize data from Settings --------------------------- */
         // See also: https://developer.android.com/training/data-storage/shared-preferences
 
@@ -86,7 +111,7 @@ class SettingsFragment : Fragment() {
         val guestViewContainer = binding.settingsLoginContainer
         val adminViewContainer = binding.settingsLogoutContainer
 
-        if (app.isAdmin() && app.displayAdminView()){
+        if (app.isAdmin() && app.displayAdminView()) {
             guestViewContainer.isInvisible = true
             adminViewContainer.isInvisible = false
         } else {
@@ -128,7 +153,7 @@ class SettingsFragment : Fragment() {
 
         val btnEditLayout = binding.btnEditLayout
         btnEditLayout.setOnClickListener {
-            if (app.isAdmin() && app.displayAdminView()){
+            if (app.isAdmin() && app.displayAdminView()) {
                 findNavController().navigate(R.id.navigation_layoutEditor)
             }
         }
@@ -139,11 +164,10 @@ class SettingsFragment : Fragment() {
     }
 
 
-
     override fun onDestroyView() {
 
         val userField = binding.txtUsername
-        if (!userField.text.equals("") && userField.text.length > 3){
+        if (!userField.text.equals("") && userField.text.length > 3) {
             val app = (activity!!.application as KartoffelApp)
             app.setUserName(userField.text.toString())
             app.save()
@@ -154,14 +178,14 @@ class SettingsFragment : Fragment() {
     }
 
 
-    private fun onDarkModeToggledHandler(mode: Boolean){
+    private fun onDarkModeToggledHandler(mode: Boolean) {
         val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return
-        with (cfg.edit())
+        with(cfg.edit())
         {
             putBoolean(getString(R.string.cfgDarkMode), mode)
             apply()
         }
-        if (mode){
+        if (mode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -172,11 +196,17 @@ class SettingsFragment : Fragment() {
 
     private fun onNotificationsToggleHandler(mode: Boolean) {
         val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return
-        with (cfg.edit())
+        with(cfg.edit())
         {
             putBoolean(getString(R.string.cfgNotifications), mode)
             apply()
         }
         println("Notifications are now: ${if (mode) "on" else "off"}")
+    }
+
+    fun Activity.hideSoftKeyboard(editText: EditText) {
+        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+            hideSoftInputFromWindow(editText.windowToken, 0)
+        }
     }
 }
