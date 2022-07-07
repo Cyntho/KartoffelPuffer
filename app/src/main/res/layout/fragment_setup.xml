@@ -59,7 +59,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
-                    android:text="@string/txtWelcome" />
+                    android:text="@string/txtWelcome"
+                    android:textColor="@color/textcolor" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:labelFor="@id/editTextSetupUsername"
                         android:text="@string/lbl_username"
+                        android:textColor="@color/textcolor"
                         android:textSize="16sp" />
 
                     <EditText
@@ -84,7 +86,8 @@
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:minHeight="48dp"
-                        android:text="" />
+                        android:text=""
+                        android:textColor="@color/textcolor" />
 
                 </LinearLayout>
             </LinearLayout>

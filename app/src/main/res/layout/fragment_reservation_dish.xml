@@ -53,7 +53,8 @@
                     android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
                     android:text="Name:"
-                    android:textColor="@color/textcolor" />
+                    android:textColor="@color/textcolor"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/dish_name"
@@ -84,7 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Anzahl:"
-            android:textColor="@color/textcolor" />
+            android:textColor="@color/textcolor"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,13 +107,13 @@
 
             <TextView
                 android:id="@+id/dish_count"
+                style="@style/backgroundgrey"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:background="@drawable/roundedbuttongrey"
                 android:gravity="center|center_horizontal"
                 android:text="1"
                 android:textAlignment="gravity"
-                android:textColor="@color/white" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/dish_countp"
@@ -137,7 +139,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Inhaltsstoffe:"
-            android:textColor="@color/textcolor" />
+            android:textColor="@color/textcolor"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/dishes_list"
@@ -163,7 +166,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Gluten"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Eier"
@@ -175,7 +178,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Eier"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Fisch"
@@ -187,7 +190,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Fisch"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Soja"
@@ -199,7 +202,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Soja"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -218,7 +221,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Nüsse"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Milch"
@@ -230,7 +233,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Milch"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Lupinen"
@@ -242,7 +245,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Lupinen"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Sesam"
@@ -253,18 +256,23 @@
                     android:layout_weight="1"
                     android:clickable="false"
                     android:text="Sesam"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/dishDescription"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="5dp"
-            android:text="Beschreibung:"
-            android:textColor="@color/textcolor" />
+            android:layout_height="150dp">
+
+            <TextView
+                android:id="@+id/dishDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Beschreibung:"
+                android:textColor="@color/textcolor" />
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dish_add"
@@ -281,7 +289,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/roundedbuttonred"
             android:text="Abbrechen" />

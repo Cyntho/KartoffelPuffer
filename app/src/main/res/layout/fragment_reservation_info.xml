@@ -137,7 +137,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Vorbestellte Gerichte"
-            android:textColor="@color/textcolor" />
+            android:textColor="@color/textcolor"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/reservation_info_disc"
@@ -146,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:height="300dp"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="TextView"
             tools:ignore="TextContrastCheck" />
 
