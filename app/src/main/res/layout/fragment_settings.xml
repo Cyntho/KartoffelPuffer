@@ -30,7 +30,7 @@
 
         <Switch
             android:id="@+id/switch_DarkMode"
-            style="@style/backgroundgrey"
+            style="@style/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -43,7 +43,7 @@
 
         <Switch
             android:id="@+id/switch_Notifications"
-            style="@style/backgroundgrey"
+            style="@style/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -63,7 +63,7 @@
 
             <TextView
                 android:id="@+id/lbl_username"
-                style="@style/backgroundgrey"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -101,7 +101,7 @@
 
             <TextView
                 android:id="@+id/lbl_adminCode"
-                style="@style/backgroundgrey"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -130,21 +130,24 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAuthAsAdmin"
-            style="@style/backgroundgrey"
-            android:layout_width="wrap_content"
+            style="@style/background"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
             android:text="@string/btn_authAsAdmin" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_imprint"
-            style="@style/backgroundgrey"
-            android:layout_width="wrap_content"
+            style="@style/background"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
             android:gravity="center"
             android:text="@string/btn_imprint"
-            android:textColor="@color/white"
             tools:ignore="TextContrastCheck" />
 
     </LinearLayout>
