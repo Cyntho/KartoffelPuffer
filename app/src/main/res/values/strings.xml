@@ -79,6 +79,7 @@
     <string name="alert_failure">Fehlgeschlagen</string>
     <string name="adminReservationListTitle">Reservierungsliste</string>
     <string name="btn_logout">Logout</string>
+    <string name="btn_back">Zurück</string>
 
 
 </resources>

@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnDate"
+                android:id="@+id/layout_name"
                 style="@style/background"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
@@ -35,7 +35,7 @@
                 tools:text="27/06/2022" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnTime"
+                android:id="@+id/layout_validfrom"
                 style="@style/background"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
