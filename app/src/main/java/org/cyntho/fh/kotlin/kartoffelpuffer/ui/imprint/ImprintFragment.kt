@@ -8,8 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.runBlocking
 import org.cyntho.fh.kotlin.kartoffelpuffer.R
+import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentImprintBinding
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
 
 class ImprintFragment : Fragment() {
 
@@ -27,11 +31,23 @@ class ImprintFragment : Fragment() {
 
         _binding = FragmentImprintBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val app: KartoffelApp = (requireActivity().application as KartoffelApp)
 
-        val txTitle: TextView = binding.txImprintTitle
-        viewModel.title.observe(viewLifecycleOwner, Observer {
-            txTitle.text = it
-        })
+
+        var response: NetPacket? = null
+        runBlocking {
+            response = NetManager().send("/getImprint", NetPacket(System.currentTimeMillis(), app.getUserToken(), 0, ""))
+        }
+
+        var imprintText = "Copyright &copy; 2022 - github.com/cyntho/KartoffelPuffer"
+
+        if (response != null){
+            imprintText = response!!.data
+        }
+
+        val imprintContent = binding.txtImprintContent
+        imprintContent.text = imprintText
+
         return root
     }
 

@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_settings,
                 R.id.navigation_home,
                 R.id.navigation_setup,
+                R.id.navigation_imprint,
 
                 R.id.navigation_reservations,
                 R.id.navigation_reservation_details,

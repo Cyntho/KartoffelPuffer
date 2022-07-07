@@ -59,7 +59,7 @@ class SettingsFragment : Fragment() {
         // Imprint button handler
         val btnImprint: Button = binding.btnImprint
         btnImprint.setOnClickListener {
-            it.findNavController().navigate(R.id.navigation_layoutEditor)
+            it.findNavController().navigate(R.id.navigation_imprint)
         }
 
         // Text field: Username

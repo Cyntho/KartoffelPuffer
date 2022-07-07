@@ -72,6 +72,13 @@
             tools:layout="@layout/fragment_admin_reservation"
             />
 
+    <fragment
+            android:id="@+id/navigation_imprint"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.imprint.ImprintFragment"
+            android:label="@string/title_imprint"
+            tools:layout="@layout/fragment_imprint"
+            />
+
 
 
 
