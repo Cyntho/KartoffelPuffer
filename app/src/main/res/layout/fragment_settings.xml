@@ -7,96 +7,56 @@
     tools:context=".ui.settings.SettingsFragment">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txSettingsTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_settings"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <Switch
-            android:id="@+id/switch_DarkMode"
-            style="@style/background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:minHeight="48dp"
-            android:padding="20dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/lbl_DarkMode"
-            android:textSize="18sp" />
-
-        <Switch
-            android:id="@+id/switch_Notifications"
-            style="@style/background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:minHeight="48dp"
-            android:padding="20dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/lbl_Notifications"
-            android:textSize="18sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/lbl_username"
+                android:id="@+id/txSettingsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_settings"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_DarkMode"
                 style="@style/background"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:labelFor="@id/txt_username"
-                android:minHeight="32dp"
-                android:text="@string/lbl_username"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:minHeight="48dp"
+                android:padding="20dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/lbl_DarkMode"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/txt_username"
+            <Switch
+                android:id="@+id/switch_Notifications"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:ems="10"
-                android:gravity="center_horizontal"
-                android:importantForAutofill="no"
-                android:inputType="text"
+                android:layout_marginTop="15dp"
                 android:minHeight="48dp"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:textColor="@color/textcolor"
-                android:textColorHint="@color/white" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/settingsLoginContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:padding="20dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/lbl_Notifications"
+                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,78 +66,123 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/lbl_adminCode"
+                    android:id="@+id/lbl_username"
                     style="@style/background"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:labelFor="@id/txt_adminCode"
+                    android:labelFor="@id/txt_username"
                     android:minHeight="32dp"
-                    android:text="@string/lbl_adminCode"
+                    android:text="@string/lbl_username"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/txt_adminCode"
+                    android:id="@+id/txt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+
                     android:ems="10"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:importantForAutofill="no"
                     android:inputType="text"
-                    android:maxLength="7"
                     android:minHeight="48dp"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
+                    android:textColor="@color/textcolor"
+                    android:textColorHint="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/settingsLoginContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/lbl_adminCode"
+                        style="@style/background"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:labelFor="@id/txt_adminCode"
+                        android:minHeight="32dp"
+                        android:text="@string/lbl_adminCode"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/txt_adminCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:gravity="center"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:maxLength="7"
+                        android:minHeight="48dp"
+                        android:selectAllOnFocus="true"
+                        android:singleLine="true"
+                        android:textColor="@color/textcolor" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAuthAsAdmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/roundedbuttongreen"
+                    android:text="@string/btn_authAsAdmin"
                     android:textColor="@color/textcolor" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/settingsLogoutContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSettingsLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/roundedbuttonred"
+                    android:text="@string/btn_logout"
+                    android:textColor="@color/textcolor" />
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnAuthAsAdmin"
+                android:id="@+id/btn_imprint"
+                style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/roundedbuttongreen"
-                android:text="@string/btn_authAsAdmin"
-                android:textColor="@color/textcolor" />
+                android:gravity="center"
+                android:text="@string/btn_imprint"
+                tools:ignore="TextContrastCheck" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/settingsLogoutContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSettingsLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/roundedbuttonred"
-                android:text="@string/btn_logout"
-                android:textColor="@color/textcolor" />
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_imprint"
-            style="@style/background"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="@string/btn_imprint"
-            tools:ignore="TextContrastCheck" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

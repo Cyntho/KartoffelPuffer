@@ -7,40 +7,48 @@
         android:layout_height="match_parent"
         tools:context=".ui.reservations.ReservationsFragment">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/reservationsLayoutContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/reservationsLayoutContainer">
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
                 android:id="@+id/lblTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Meine Reservierungen"
                 android:textColor="@color/textcolor"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnMyReservationsPrefab"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnMyReservationsPrefab2"
                 style="@style/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
                 android:width="300dp"
                 android:height="100dp"
                 android:maxWidth="350dp"
                 android:minWidth="100dp"
-                android:text="Button"/>
+                android:text="Button" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

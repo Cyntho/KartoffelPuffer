@@ -6,245 +6,245 @@
     android:layout_height="match_parent"
     tools:context=".ui.reservations.ReservationsFragment">
 
-    <TextView
-        android:id="@+id/tvTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/title_createDish"
-        android:textColor="@color/textcolor"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="2"
-                android:gravity="center|center_horizontal"
-                android:text="Name"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
+                android:gravity="center_horizontal"
+                android:text="@string/title_createDish"
+                android:textColor="@color/textcolor"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:textSize="20sp" />
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    style="@style/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center|center_horizontal"
+                    android:text="Name"
+                    android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/editTextTextPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="Name"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/textView12"
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="2"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Foto"
-                android:textSize="20sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:src="@android:drawable/btn_dialog" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Inhaltsstoffe"
-            android:textColor="@color/textcolor"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:id="@+id/dishes_list"
-            style="@style/backgroundgrey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/gluten"
+                <TextView
+                    android:id="@+id/textView12"
                     style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Gluten"
-                    android:textSize="14sp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="Foto"
+                    android:textSize="20sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Eier"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Eier"
-                    android:textSize="14sp" />
+                    android:src="@android:drawable/btn_dialog" />
+            </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Fisch"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Fisch"
-                    android:textSize="14sp" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Inhaltsstoffe"
+                android:textColor="@color/textcolor"
+                android:textSize="18sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Soja"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Soja"
-                    android:textSize="14sp" />
+            <LinearLayout
+                android:id="@+id/dishes_list"
+                style="@style/backgroundgrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/gluten"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Gluten"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Eier"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Eier"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Fisch"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Fisch"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Soja"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Soja"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Nüsse"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Nüsse"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Milch"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Milch"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Lupinen"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:checkable="false"
+                        android:clickable="false"
+                        android:text="Lupinen"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/Sesam"
+                        style="@style/background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:text="Sesam"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Nüsse"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Nüsse"
-                    android:textSize="14sp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/reservation_info_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/roundedbuttongreen"
+                android:text="Hinzufügen"
+                android:textSize="20sp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Milch"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Milch"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Lupinen"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:checkable="false"
-                    android:clickable="false"
-                    android:text="Lupinen"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/Sesam"
-                    style="@style/background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="75dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:text="Sesam"
-                    android:textSize="14sp" />
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/reservation_info_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/roundedbuttonred"
+                android:text="Abbrechen"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/reservation_info_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/roundedbuttongreen"
-            android:text="Hinzufügen"
-            android:textSize="20sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/reservation_info_back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/roundedbuttonred"
-            android:text="Abbrechen"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

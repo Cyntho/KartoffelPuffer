@@ -6,251 +6,252 @@
     android:layout_height="match_parent"
     tools:context=".ui.reservations.ReservationsFragment">
 
-    <TextView
-        android:id="@+id/tvTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="@string/title_reservations_detail"
-        android:textColor="@color/textcolor"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/reservation_date"
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:background="@drawable/roundedbutton"
-                android:gravity="center|center_horizontal"
-                android:text="Datum:" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/reservation_date_button"
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundedbutton"
-                android:text="Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/dish_count"
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="3"
-                android:background="@drawable/roundedbutton"
-                android:gravity="center|center_horizontal"
-                android:text="Uhrzeit:" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/dish_countp"
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundedbutton"
-                android:text="Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/reservation_size1"
-                style="@style/background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundedbutton"
-                android:gravity="center|center_horizontal"
-                android:text="Personen:" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnRemovePerson"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-
-                android:layout_weight="1"
-                android:background="@drawable/roundedbuttonred"
-                android:text="-" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnReservationSize1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/roundedbutton"
-                android:text="Button" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnAddPerson"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="10dp"
-
-                android:layout_weight="1"
-                android:background="@drawable/roundedbuttongreen"
-                android:text="+" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="center_horizontal"
-            android:text="@string/fav_food"
-            android:textColor="@color/textcolor"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/food_select"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/roundedbutton"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/foodPrefab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_home_black_24dp" />
-        </LinearLayout>
-
-        <ScrollView
-            style="@style/background"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp">
-
-            <LinearLayout
-                android:id="@+id/dishes_list"
+            <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                android:gravity="center_horizontal"
+                android:text="@string/title_reservations_detail"
+                android:textColor="@color/textcolor"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reservation_date"
+                    style="@style/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/roundedbutton"
+                    android:gravity="center|center_horizontal"
+                    android:text="Datum:" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/reservation_date_button"
+                    style="@style/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbutton"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/dish_count"
+                    style="@style/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/roundedbutton"
+                    android:gravity="center|center_horizontal"
+                    android:text="Uhrzeit:" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dish_countp"
+                    style="@style/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbutton"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/reservation_size1"
+                    style="@style/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbutton"
+                    android:gravity="center|center_horizontal"
+                    android:text="Personen:" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRemovePerson"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbuttonred"
+                    android:text="-" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReservationSize1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbutton"
+                    android:text="Button" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddPerson"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/roundedbuttongreen"
+                    android:text="+" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/fav_food"
+                android:textColor="@color/textcolor"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/food_select"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/roundedbutton"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/foodPrefab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_home_black_24dp" />
+            </LinearLayout>
+
+            <ScrollView
+                style="@style/background"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
-                    android:id="@+id/dishEntryPrefab"
+                    android:id="@+id/dishes_list"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtPrefabName"
+                    <LinearLayout
+                        android:id="@+id/dishEntryPrefab"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Name des Gerichts"
-                        android:textColor="@color/textcolor"
-                        android:textSize="16sp" />
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
-                    <TextView
-                        android:id="@+id/txtPrefabAmount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/roundedbuttongrey"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/white" />
+                        <TextView
+                            android:id="@+id/txtPrefabName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Name des Gerichts"
+                            android:textColor="@color/textcolor"
+                            android:textSize="16sp" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnPrefabDelete"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/roundedbuttonred"
-                        android:text="X"
-                        android:textColor="@color/white" />
+                        <TextView
+                            android:id="@+id/txtPrefabAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="3"
+                            android:background="@drawable/roundedbuttongrey"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="@color/white" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnPrefabDelete"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="3"
+                            android:background="@drawable/roundedbuttonred"
+                            android:text="X"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            </ScrollView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dish_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/roundedbuttongreen"
-            android:text="Weiter" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/dish_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/roundedbuttongreen"
+                android:text="Weiter" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dish_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/roundedbuttonred"
-            android:text="Abbrechen" />
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/dish_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/roundedbuttonred"
+                android:text="Abbrechen" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
