@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isInvisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.runBlocking
 import org.cyntho.fh.kotlin.kartoffelpuffer.MainActivity
@@ -48,12 +50,14 @@ class SettingsFragment : Fragment() {
         val swDarkMode: Switch = binding.switchDarkMode
         swDarkMode.setOnClickListener {
             onDarkModeToggledHandler(swDarkMode.isChecked)
+            findNavController().navigate(R.id.navigation_settings)
         }
 
         // Notifications Switch handler
         val swNotification: Switch = binding.switchNotifications
         swNotification.setOnClickListener {
             onNotificationsToggleHandler(swNotification.isChecked)
+            findNavController().navigate(R.id.navigation_settings)
         }
 
         // Imprint button handler
@@ -65,24 +69,34 @@ class SettingsFragment : Fragment() {
         // Text field: Username
         val txtUsername: EditText = binding.txtUsername
 
+        /* --------------- Initialize data from Settings --------------------------- */
+        // See also: https://developer.android.com/training/data-storage/shared-preferences
 
-        txtUsername.addTextChangedListener {
-            object : TextWatcher {
+        // Load saved settings
+        val app = requireActivity().application as KartoffelApp
+        val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return root
 
-                override fun afterTextChanged(s: Editable?) {
-                    println("New text: $s")
-                }
+        swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
+        swNotification.isChecked = cfg.getBoolean(getString(R.string.cfgNotifications), false)
 
-                // useless, but must-have..
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            }
+        txtUsername.setText(app.getUserName())
+
+        // ------------ Admin VIEW ------------
+
+        val guestViewContainer = binding.settingsLoginContainer
+        val adminViewContainer = binding.settingsLogoutContainer
+
+        if (app.isAdmin() && app.displayAdminView()){
+            guestViewContainer.isInvisible = true
+            adminViewContainer.isInvisible = false
+        } else {
+            guestViewContainer.isInvisible = false
+            adminViewContainer.isInvisible = true
         }
 
         // Button: Auth as Admin
         val btnAuth: Button = binding.btnAuthAsAdmin
         val txtCode = binding.txtAdminCode
-        val app: KartoffelApp = activity!!.application as KartoffelApp
 
         btnAuth.setOnClickListener {
             val mgr = NetManager()
@@ -94,26 +108,26 @@ class SettingsFragment : Fragment() {
                 mgr.login(token, txtCode.text.toString())
             }
 
-            println("isAdmin: $isAdmin")
-
             app.setAdmin(isAdmin)
             app.setAdminView(isAdmin)
+            app.save()
 
             // ToDo: Handle displaying..
         }
 
 
+        val btnLogout = binding.btnSettingsLogout
+        btnLogout.text = getString(R.string.btn_logout)
+        btnLogout.setOnClickListener {
 
-        /* --------------- Initialize data from Settings --------------------------- */
-        // See also: https://developer.android.com/training/data-storage/shared-preferences
+            app.setAdminView(false)
+            app.save()
 
-        // Load saved settings
-        val cfg = activity?.getSharedPreferences("config", Context.MODE_PRIVATE) ?: return root
+            findNavController().navigate(R.id.navigation_settings)
+        }
 
-        swDarkMode.isChecked = cfg.getBoolean(getString(R.string.cfgDarkMode), false)
-        swNotification.isChecked = cfg.getBoolean(getString(R.string.cfgNotifications), false)
 
-        txtUsername.setText(app.getUserName())
+
 
         return root
     }

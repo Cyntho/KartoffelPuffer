@@ -68,22 +68,31 @@ class KartoffelApp : Application() {
     public fun getDishById(id: Int): Dish? { return _dishMap[id]}
 
 
-    public fun debug(){
-        println("Username: [$_userName]\t token: [$_userToken]\t uuid: [$_userUUID]\t isAdmin: [$_isAdmin]\t adminView: [$_adminViewActive]")
-    }
-
     public fun save(){
         try {
             val cfg = getSharedPreferences("config", Context.MODE_PRIVATE)
             if (cfg != null){
                 with (cfg.edit()) {
                     putString(getString(R.string.cfgUserName), _userName)
+                    putBoolean(getString(R.string.cfgAdminViewActive), _adminViewActive)
                     apply()
                 }
             } else {
                 println("Unable to save App data")
             }
         } catch (any: java.lang.Exception){
+            any.printStackTrace()
+        }
+    }
+
+    public fun load(){
+        try {
+            val cfg = getSharedPreferences("config", Context.MODE_PRIVATE)
+            if (cfg != null){
+                _userName = cfg.getString(getString(R.string.cfgUserName), "New Guest")!!
+                _adminViewActive = cfg.getBoolean(getString(R.string.cfgAdminViewActive), false)
+            }
+        } catch (any: Exception){
             any.printStackTrace()
         }
     }

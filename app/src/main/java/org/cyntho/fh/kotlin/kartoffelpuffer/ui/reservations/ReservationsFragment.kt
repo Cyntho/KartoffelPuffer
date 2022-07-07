@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,8 +16,10 @@ import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.databinding.FragmentReservationsBinding
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetManager
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.NetPacket
+import org.cyntho.fh.kotlin.kartoffelpuffer.net.ReservationListEntry
 import org.cyntho.fh.kotlin.kartoffelpuffer.net.ReservationWrapper
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ReservationsFragment : Fragment() {
@@ -38,10 +41,6 @@ class ReservationsFragment : Fragment() {
 
 
         // Forward to admin view, if authorized
-
-
-
-        // Load app and current reservation. Return on failure
         val app: KartoffelApp = activity!!.application as KartoffelApp ?: return root
         if (app.isAdmin() && app.displayAdminView()){
             println("Forwarding..")
@@ -60,7 +59,7 @@ class ReservationsFragment : Fragment() {
         }
         if (response != null && response!!.type == 0){
             println("Response: $response")
-            val raw = GsonBuilder().create().fromJson(response!!.data, Array<ReservationWrapper>::class.java)
+            val raw = GsonBuilder().create().fromJson(response!!.data, Array<ReservationListEntry>::class.java)
             val list = raw.asList().toMutableList()
 
             for (entry in list){
@@ -69,17 +68,20 @@ class ReservationsFragment : Fragment() {
                 val button = AppCompatButton(requireContext())
                 button.layoutParams = btnPrefab.layoutParams
                 button.background = btnPrefab.background
-                //button.text = entry.start.toString()
 
+                val startTimer = SimpleDateFormat("dd.MM.yyyy - HH:mm", Locale.GERMAN).format(Timestamp(entry.start))
+                val label = "$startTimer (${entry.people} Personen)\n ${entry.username}"
+
+                button.setOnClickListener {
+                    val bundle = bundleOf("reservation_id" to entry.id)
+                    findNavController().navigate(R.id.navigation_reservation_details, bundle)
+                }
+
+                button.text = label
                 containerBox.addView(button)
             }
             containerBox.removeView(btnPrefab)
         }
-
-
-
-
-
         return root
     }
 

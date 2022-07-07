@@ -41,6 +41,7 @@
     <string name="cfgNotifications">cfgNotifications</string>
     <string name="cfgUserToken">cfgUserToken</string>
     <string name="cfgUserName">cfgUserName</string>
+    <string name="cfgAdminViewActive">cfgAdminViewActive</string>
 
     <!-- Networking -->
     <string name="backend_host">10.0.2.2</string>

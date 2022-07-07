@@ -6,12 +6,14 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.gson.GsonBuilder
 import io.ktor.client.request.*
+import io.ktor.http.*
 import kotlinx.coroutines.*
 import org.cyntho.fh.kotlin.kartoffelpuffer.app.KartoffelApp
 import org.cyntho.fh.kotlin.kartoffelpuffer.data.Dish
@@ -56,11 +58,19 @@ class MainActivity : AppCompatActivity() {
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null)
         {
-            actionBar.setDisplayShowHomeEnabled(false)
+            actionBar.setDisplayShowHomeEnabled(true)
             actionBar.setIcon(R.mipmap.ic_launcher)
         }
 
         val cfg = getSharedPreferences("config", Context.MODE_PRIVATE)
+
+        val doDarkMode = cfg.getBoolean(getString(R.string.cfgDarkMode), true)
+        if (doDarkMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
 
         val uuid = cfg.getString(getString(R.string.cfgUUID), UUID.randomUUID().toString()) ?: UUID.randomUUID().toString()
         val name: String = cfg.getString(getString(R.string.cfgUserName), "Unknown") ?: "Unknown"
@@ -80,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             putString(getString(R.string.cfgUUID), uuid)
             apply()
         }
-
+        app.load()
         getUpdateFromServer()
 
         setupActionBarWithNavController(navController, appBarConfiguration)

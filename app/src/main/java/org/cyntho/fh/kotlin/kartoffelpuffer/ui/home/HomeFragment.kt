@@ -150,7 +150,7 @@ class HomeFragment : Fragment() {
         var counter = 0
         val colorEmpty = ContextCompat.getColor(context!!, R.color.grid_empty)
         val colorWall  = ContextCompat.getColor(context!!, R.color.grid_wall)
-        val colorTable = ContextCompat.getColor(context!!, R.color.grid_table)
+        val colorTable = ContextCompat.getColor(context!!, R.color.grid_free)
 
         for (y in 0 until wrapper.sizeY){
             for (x in 0 until wrapper.sizeX){
