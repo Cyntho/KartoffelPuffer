@@ -48,7 +48,7 @@
                 android:layout_weight="2"
                 android:gravity="center|center_horizontal"
                 android:text="Name"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName"
@@ -58,7 +58,8 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Name"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -77,7 +78,7 @@
                 android:layout_weight="2"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="Foto"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/imageButton"
@@ -120,7 +121,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Gluten"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Eier"
@@ -132,7 +133,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Eier"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Fisch"
@@ -144,7 +145,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Fisch"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Soja"
@@ -156,7 +157,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Soja"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -175,7 +176,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Nüsse"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Milch"
@@ -187,7 +188,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Milch"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Lupinen"
@@ -199,7 +200,7 @@
                     android:checkable="false"
                     android:clickable="false"
                     android:text="Lupinen"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/Sesam"
@@ -210,7 +211,7 @@
                     android:layout_weight="1"
                     android:clickable="false"
                     android:text="Sesam"
-                    android:textSize="10sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -224,18 +225,24 @@
             android:id="@+id/reservation_info_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/roundedbuttongreen"
-            android:text="Hinzufügen" />
+            android:text="Hinzufügen"
+            android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reservation_info_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/roundedbuttonred"
             android:text="Abbrechen"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

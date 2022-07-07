@@ -153,7 +153,8 @@
             android:layout_marginRight="60dp"
             android:background="@drawable/roundedbuttonred"
             android:text="löschen"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reservation_admin_back"
@@ -163,7 +164,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="60dp"
             android:background="@drawable/roundedbuttongreen"
-            android:text="zurück" />
+            android:text="zurück"
+            android:textSize="20sp" />
     </LinearLayout>
 
 

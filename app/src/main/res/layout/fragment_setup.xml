@@ -22,6 +22,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:elevation="2dp"
             android:src="@drawable/ql4v6muc2h8631id71gjnsnaq6" />
 
         <TextView
