@@ -88,6 +88,7 @@ class SettingsFragment : Fragment() {
                             txtUsername.text.toString()
                         )
                     )
+                    requireActivity().hideSoftKeyboard(txtUsername)
                     println("Sending Username " + txtUsername.text.toString())
                 }
                 return@OnKeyListener true
