@@ -93,14 +93,19 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/settingsLoginContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:id="@+id/settingsLoginContainer">
+                android:orientation="horizontal">
 
-            <TextView
+                <TextView
                     android:id="@+id/lbl_adminCode"
                     style="@style/background"
                     android:layout_width="match_parent"
@@ -111,9 +116,9 @@
                     android:minHeight="32dp"
                     android:text="@string/lbl_adminCode"
                     android:textAlignment="center"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
-            <EditText
+                <EditText
                     android:id="@+id/txt_adminCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,18 +131,39 @@
                     android:minHeight="48dp"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
-                    android:textColor="@color/textcolor"/>
+                    android:textColor="@color/textcolor" />
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnAuthAsAdmin"
-                    style="@style/background"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginRight="20dp"
-                    android:text="@string/btn_authAsAdmin"/>
+                android:id="@+id/btnAuthAsAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/roundedbuttongreen"
+                android:text="@string/btn_authAsAdmin"
+                android:textColor="@color/textcolor" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/settingsLogoutContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSettingsLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/roundedbuttonred"
+                android:text="@string/btn_logout"
+                android:textColor="@color/textcolor" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -151,20 +177,6 @@
             android:gravity="center"
             android:text="@string/btn_imprint"
             tools:ignore="TextContrastCheck" />
-
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/settingsLogoutContainer">
-
-            <androidx.appcompat.widget.AppCompatButton
-                    android:text="@string/btn_logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnSettingsLogout"
-                    style="@style/background"/>
-        </LinearLayout>
 
     </LinearLayout>
 
