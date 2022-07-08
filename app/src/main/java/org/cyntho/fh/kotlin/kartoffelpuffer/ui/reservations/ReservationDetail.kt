@@ -181,7 +181,16 @@ class ReservationDetail : Fragment() {
 
             textViewName.text = dish.name
             textViewAmount.text = entry.value.toString()
-            btnDelete.setOnClickListener { handleListEntryDelete(dish.dishId) }
+            btnDelete.setOnClickListener {
+                dishMap.remove(entry.key)
+                val tmp = app.getCurrentReservation()
+                val arr = tmp!!.dishes
+                arr!!.remove(entry.key)
+                tmp.dishes = arr
+                app.setCurrentReservation(tmp)
+                findNavController().navigate(R.id.navigation_reservation_details)
+                //handleListEntryDelete(dish.dishId)
+            }
 
             val row = LinearLayout(ctx)
             row.layoutParams = dishRowPrefab.layoutParams

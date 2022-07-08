@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.gson.GsonBuilder
@@ -25,6 +26,7 @@ class ReservationDish : Fragment() {
 
     private var dishCounter = 1
     private var dish: Dish? = null
+    private var _readOnly: Boolean = false
     private var _backup: MutableMap<Int, Int> = mutableMapOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,6 +46,10 @@ class ReservationDish : Fragment() {
 
         dish = app.getDishById(dishID)
         if (dish == null) return root
+
+        // Read only?
+        val isReadOnly = arguments?.getBoolean("readOnly", false) ?: false
+
 
         // Bindings
         val txtDishName     = binding.dishName
@@ -85,8 +91,6 @@ class ReservationDish : Fragment() {
             println("Found allergies:")
             println(allergy)
 
-
-
             when (allergy.name){
                 "Fisch" -> btnFish.setBackgroundResource(R.drawable.roundedbuttongreen)
                 "Soja" -> btnSoy.setBackgroundResource(R.drawable.roundedbuttongreen)
@@ -106,7 +110,6 @@ class ReservationDish : Fragment() {
 
         // handle confirm/cancel buttons
         binding.dishAdd.setOnClickListener {
-
             _backup[dishID] = dishCounter
 
             val current = app.getCurrentReservation()!!
@@ -116,6 +119,18 @@ class ReservationDish : Fragment() {
         }
         binding.dishCancel.setOnClickListener {
             findNavController().navigate(R.id.navigation_reservation_details)
+        }
+
+        if (isReadOnly){
+            btnAmountMinus.isInvisible = true
+            btnAmountPlus.isInvisible = true
+            binding.dishAdd.isInvisible = true
+            binding.lblDishDetailsAmount.isInvisible = true
+            binding.dishDetailsAmountContainer.isInvisible = true
+            binding.dishCancel.text = "Zurück"
+            binding.dishCancel.setOnClickListener {
+                findNavController().navigate(R.id.navigation_admin_dish_manager)
+            }
         }
 
         return root

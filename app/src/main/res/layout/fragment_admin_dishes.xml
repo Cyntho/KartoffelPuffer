@@ -42,57 +42,59 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/dishEntryPrefab"
+                    android:id="@+id/dishListPrefabEntry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/txtPrefabName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Name des Gerichts"
-                        android:textColor="@color/textcolor"
-                        android:textSize="16sp" />
+                            android:id="@+id/txtDishListPrefabName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Name des Gerichts"
+                            android:textColor="@color/textcolor"
+                            android:textSize="20sp"/>
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnPrefabDelete2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/roundedbuttongreen"
-                        android:text="Edit"
-                        android:textColor="@color/white" />
+                            android:id="@+id/btnDishListPrefabEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="3"
+                            android:background="@drawable/roundedbuttongreen"
+                            android:text="Details"
+                            android:textColor="@color/white"/>
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnPrefabDelete"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/roundedbuttonred"
-                        android:text="X"
-                        android:textColor="@color/white" />
+                            android:id="@+id/btnDishListPrefabDelete"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="3"
+                            android:background="@drawable/roundedbuttonred"
+                            android:text="X"
+                            android:textColor="@color/white"
+                            android:visibility="gone"/>
 
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dish_add"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/roundedbuttongreen"
-            android:text="Neues Gericht" />
+                android:id="@+id/btnDishListCreateNew"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/roundedbuttongreen"
+                android:text="Neues Gericht"
+                android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dish_cancel"
+            android:id="@+id/btnDishListCreateCancel"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_marginLeft="40dp"

@@ -107,6 +107,13 @@
             tools:layout="@layout/fragment_create_dish"
             />
 
+    <fragment
+            android:id="@+id/navigation_admin_dish_manager"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.admin.AdminDishesManagerFragment"
+            android:label="Gerichte"
+            tools:layout="@layout/fragment_admin_dishes"
+            />
+
 
 
 

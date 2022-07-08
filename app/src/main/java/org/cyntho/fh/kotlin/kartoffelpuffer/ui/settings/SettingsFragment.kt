@@ -153,6 +153,13 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        val btnEditDishes = binding.btnEditDishes
+        btnEditDishes.setOnClickListener {
+            if (app.isAdmin() && app.displayAdminView()){
+                findNavController().navigate(R.id.navigation_admin_dish_manager)
+            }
+        }
+
 
 
         return root

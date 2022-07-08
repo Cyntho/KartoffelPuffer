@@ -83,8 +83,6 @@ class CreateDishFragment : Fragment() {
                 -1, true, imagePath, txtDishName.text.toString(),
                 mutableListOf(), txtDishDescription.text.toString()
             )
-
-
         }
 
         btnCancel.setOnClickListener {
