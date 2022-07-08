@@ -14,15 +14,15 @@
 
     <color name="app_background_main">#5B5B5B</color>
     <color name="app_background_header">#777777</color>
-    <color name="app_background_User">#FF5722</color>
-    <color name="app_background_admin">#4217BA</color>
+    <color name="app_background_User">#4217BA</color>
+    <color name="app_background_admin">#FF5722</color>
     <color name="app_background_nav">#999999</color>
 
-    <color name="grid_free">#FF5722</color>
-    <color name="grid_taken">#4217BA</color>
+    <color name="grid_free">#4217BA</color>
+    <color name="grid_taken">#FF5722</color>
 
-    <color name="validate">#FF5722</color>
-    <color name="cancel">#4217BA</color>
+    <color name="validate">#4217BA</color>
+    <color name="cancel">#FF5722</color>
 
     <color name="grid_table">#6B8EC8</color>
     <color name="grid_empty">#6C6C6C</color>
