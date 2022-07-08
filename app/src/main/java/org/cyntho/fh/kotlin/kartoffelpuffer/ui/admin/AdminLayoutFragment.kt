@@ -135,6 +135,16 @@ class AdminLayoutFragment : Fragment() {
 
     private fun handleDelete(id: Int){
         val diag = MaterialAlertDialogBuilder(requireContext())
+
+        if (layoutMap.size == 1){
+            diag.setTitle(getString(R.string.alert_failure))
+            diag.setMessage("Es muss mindestens 1 Layout vorhanden sein!")
+            diag.setPositiveButton(android.R.string.ok) {_, _ ->}
+            diag.show()
+            return
+        }
+
+
         diag.setTitle(getString(R.string.alert_attention))
         diag.setMessage("Möchten Sie dieses Layout unwiderruflich löschen?")
         diag.setPositiveButton(getString(R.string.btn_confirm)) {_,_ ->
@@ -145,7 +155,7 @@ class AdminLayoutFragment : Fragment() {
                     NetPacket(
                         System.currentTimeMillis(),
                         (requireActivity().application as KartoffelApp).getUserToken(),
-                        0,
+                        id,
                         ""
                     )
                 )

@@ -216,7 +216,9 @@ class LayoutEditorFragment : Fragment() {
             diag.setTitle("Success")
             diag.setMessage("Layout saved successfully!")
 
-            diag.setPositiveButton(android.R.string.ok) { _, _ -> }
+            diag.setPositiveButton(android.R.string.ok) { _, _ ->
+                findNavController().navigate(R.id.navigation_admin_layout_manager)
+            }
         }
 
         diag.show()

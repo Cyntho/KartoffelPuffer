@@ -100,6 +100,13 @@
             tools:layout="@layout/fragment_admin_layout"
             />
 
+    <fragment
+            android:id="@+id/navigation_admin_create_dish"
+            android:name="org.cyntho.fh.kotlin.kartoffelpuffer.ui.admin.CreateDishFragment"
+            android:label="Gericht hinzufügen"
+            tools:layout="@layout/fragment_create_dish"
+            />
+
 
 
 
