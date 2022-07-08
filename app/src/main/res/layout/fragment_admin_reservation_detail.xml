@@ -127,7 +127,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Beschreibung"
+                android:text="Beschreibung:"
                 android:textColor="@color/textcolor"
                 android:textSize="20sp" />
 
